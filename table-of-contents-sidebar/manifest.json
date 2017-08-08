@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Table of contents sidebar",
+  "version": "1.0.0",
+  "description": "An outline tool makes it easier to navigate your novel. Automatically creates table of contents in the sidebar that can be clicked through, for easy document navigation.",
+  "content_scripts": [
+    {
+      "js": [
+        "app.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Table of contents sidebar"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}
