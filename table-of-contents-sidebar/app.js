@@ -17,21 +17,32 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     fixedSidebar.style.border = "1px solid #cecece";
     fixedSidebar.style.fontSize = "14px";
     fixedSidebar.style.whiteSpace = "nowrap";
+    var iteratorAbsTop = 0;
+    var sidebarCount = 0;
     for (var i = 0, l = documents.length; i < l; i++) {
         var node = documents[i];
-        if (node.nodeName == "H1" || node.nodeName == "H2"
-            || node.nodeName == "H3" || node.nodeName == "H4"
-            || node.nodeName == "H5" || node.nodeName == "H6"
-        ) {
+        if (!!node && (node.nodeName == "H1" || node.nodeName == "H2"
+                || node.nodeName == "H3" || node.nodeName == "H4"
+                || node.nodeName == "H5" || node.nodeName == "H6"
+            )) {
+            var absTop = node.getBoundingClientRect().top + document.documentElement.scrollTop;
+            if (absTop < iteratorAbsTop) {
+                break;
+            }
             if (!!node.id) {
                 createCellNode(node.nodeName, "#" + node.id, node.textContent);
             } else {
                 node.id = uuid();
                 createCellNode(node.nodeName, "#" + node.id, node.textContent);
             }
+            iteratorAbsTop = absTop;
+            sidebarCount = sidebarCount + 1;
+            // node.textContent = node.textContent + "(" + i + ")" + "(" + absTop + ")";
         }
     }
-    document.body.appendChild(fixedSidebar);
+    if (sidebarCount > 0) {
+        document.body.appendChild(fixedSidebar);
+    }
 
     function createCellNode(tag, url, text) {
         var linkNode = createLinkNode(url, text);
