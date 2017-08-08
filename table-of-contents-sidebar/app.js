@@ -2,21 +2,22 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     // if (data.toggle == true) {
     // }
     var documents = document.getElementsByTagName('*');
-    var tree = {};
-    tree.data = document.title;
     var fixedSidebar = document.createElement('div');
     fixedSidebar.style.position = "fixed";
     fixedSidebar.style.right = "0px";
     fixedSidebar.style.top = "0px";
     fixedSidebar.style.height = "100%";
-    fixedSidebar.style.padding = "15px";
+    fixedSidebar.style.padding = "5px 0 10px 15px";
     fixedSidebar.style.width = "250px";
     fixedSidebar.style.backgroundColor = "#f1f1f1";
     fixedSidebar.style.overflowY = "auto";
-    fixedSidebar.style.zIndex = "2000";
+    fixedSidebar.style.zIndex = "2147483647";
     fixedSidebar.style.border = "1px solid #cecece";
     fixedSidebar.style.fontSize = "14px";
     fixedSidebar.style.whiteSpace = "nowrap";
+    fixedSidebar.id = "table-of-contents-sidebar-id";
+    fixedSidebar.appendChild(createOptionsNode());
+    fixedSidebar.appendChild(document.createElement('br'));
     var iteratorAbsTop = 0;
     var sidebarCount = 0;
     for (var i = 0, l = documents.length; i < l; i++) {
@@ -37,11 +38,100 @@ chrome.storage.local.get('tocs-toggle', function (data) {
             }
             iteratorAbsTop = absTop;
             sidebarCount = sidebarCount + 1;
-            // node.textContent = node.textContent + "(" + i + ")" + "(" + absTop + ")";
         }
     }
     if (sidebarCount > 0) {
         document.body.appendChild(fixedSidebar);
+    }
+
+    function createOptionsNode() {
+        var span = createSpanNode("");
+        var left = createImageNode("images/left.png", "Float Left");
+        left.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var sidebar = document.getElementById("table-of-contents-sidebar-id");
+            sidebar.style.left = "0px";
+            sidebar.style.right = null;
+        });
+        var right = createImageNode("images/right.png", "Float Right");
+        right.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var sidebar = document.getElementById("table-of-contents-sidebar-id");
+            sidebar.style.right = "0px";
+            sidebar.style.left = null;
+        });
+        var close = createImageNode("images/close.png", "Close", "18px");
+        close.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var sidebar = document.getElementById("table-of-contents-sidebar-id");
+            sidebar.style.display = "none";
+            // var sidebarMenu = document.getElementById("table-of-contents-sidebar-hover-menu-id");
+            // sidebarMenu.style.display = "block";
+        });
+        var hover = createImageNode("images/hover.png", "Display on Hover", "18px");
+        hover.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var sidebar = document.getElementById("table-of-contents-sidebar-id");
+            sidebar.style.display = "none";
+            createHoverNode();
+        });
+        span.appendChild(left);
+        span.appendChild(right);
+        span.appendChild(close);
+        span.appendChild(hover);
+        return span;
+    }
+
+    function createHoverNode() {
+        var fixedSidebarHoverMenu = document.createElement('img');
+        fixedSidebarHoverMenu.style.position = "fixed";
+        fixedSidebarHoverMenu.style.right = "0px";
+        fixedSidebarHoverMenu.style.top = "48%";
+        fixedSidebarHoverMenu.style.height = "35px";
+        fixedSidebarHoverMenu.style.width = "35px";
+        fixedSidebarHoverMenu.style.zIndex = "2147483646";
+        fixedSidebarHoverMenu.id = "table-of-contents-sidebar-hover-menu-id";
+        fixedSidebarHoverMenu.style.cursor = "pointer";
+        fixedSidebarHoverMenu.alt = "Toggle Sidebar";
+        fixedSidebarHoverMenu.title = "Toggle Sidebar";
+        fixedSidebarHoverMenu.src = getImageUrl("icon.png");
+        document.body.appendChild(fixedSidebarHoverMenu);
+        fixedSidebarHoverMenu.addEventListener('mouseover', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var sidebar = document.getElementById("table-of-contents-sidebar-id");
+            sidebar.style.display = "block";
+            sidebar.addEventListener('mouseout', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                sidebar.style.display = "none";
+            });
+            sidebar.addEventListener('mouseover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                sidebar.style.display = "block";
+            });
+        });
+        fixedSidebarHoverMenu.addEventListener('mouseout', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var sidebar = document.getElementById("table-of-contents-sidebar-id");
+            sidebar.style.display = "none";
+            sidebar.addEventListener('mouseout', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                sidebar.style.display = "none";
+            });
+            sidebar.addEventListener('mouseover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                sidebar.style.display = "block";
+            });
+        });
     }
 
     function createCellNode(tag, url, text) {
@@ -68,7 +158,7 @@ chrome.storage.local.get('tocs-toggle', function (data) {
         }
         fixedSidebar.appendChild(linkNode);
         fixedSidebar.appendChild(document.createElement('br'));
-    };
+    }
 
     function createLinkNode(url, text) {
         var a = document.createElement('a');
@@ -76,9 +166,32 @@ chrome.storage.local.get('tocs-toggle', function (data) {
         a.appendChild(linkText);
         a.title = text;
         a.href = url;
-        document.body.appendChild(a);
         return a;
-    };
+    }
+
+    function createImageNode(url, title, size) {
+        var image = document.createElement('img');
+        image.style.marginLeft = "5px";
+        image.style.height = !!size ? size : "20px";
+        image.style.width = !!size ? size : "20px";
+        image.style.cursor = "pointer";
+        image.alt = title;
+        image.title = title;
+        image.src = getImageUrl(url);
+        return image;
+    }
+
+    function createSpanNode(text) {
+        var span = document.createElement('span');
+        var textNode = document.createTextNode(text);
+        span.appendChild(textNode);
+        return span;
+    }
+
+    function getImageUrl(name) {
+        var image = chrome.extension.getURL(name);
+        return image;
+    }
 
     function uuid() {
         function s4() {
@@ -89,5 +202,5 @@ chrome.storage.local.get('tocs-toggle', function (data) {
 
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
-    };
+    }
 });
