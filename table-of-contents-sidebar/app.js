@@ -1,6 +1,17 @@
 chrome.storage.local.get('tocs-toggle', function (data) {
     // if (data.toggle == true) {
     // }
+    var blocklist = ["google.com", "baidu.com", "stackoverflow.com"];
+    var domain = document.domain;
+    var block = false;
+    for (var i = 0; i < blocklist.length; i++) {
+        if (domain.indexOf(blocklist[i]) != -1) {
+            block = true;
+        }
+    }
+    if (block) {
+        return;
+    }
     var documents = document.getElementsByTagName('*');
     var fixedSidebar = document.createElement('div');
     fixedSidebar.style.position = "fixed";
