@@ -1,7 +1,8 @@
 chrome.storage.local.get('tocs-toggle', function (data) {
     // if (data.toggle == true) {
     // }
-    var blocklist = ["google.com", "baidu.com", "stackoverflow.com"];
+    var blocklist = ["google", "baidu.com", "stackoverflow.com", "github.com", "localhost"];
+
     var domain = document.domain;
     var block = false;
     for (var i = 0; i < blocklist.length; i++) {
@@ -51,7 +52,7 @@ chrome.storage.local.get('tocs-toggle', function (data) {
             sidebarCount = sidebarCount + 1;
         }
     }
-    if (sidebarCount > 0) {
+    if (sidebarCount > 2) {
         document.body.appendChild(fixedSidebar);
     }
 
