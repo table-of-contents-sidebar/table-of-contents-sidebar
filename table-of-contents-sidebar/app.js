@@ -28,9 +28,9 @@ chrome.storage.local.get('tocs-toggle', function (data) {
                 || node.nodeName == "H5" || node.nodeName == "H6"
             )) {
             var absTop = node.getBoundingClientRect().top + document.documentElement.scrollTop;
-            // if (sidebarCount > 0 && absTop < iteratorAbsTop) {
-            //     break;
-            // }
+            if (sidebarCount > 0 && absTop < iteratorAbsTop) {
+                break;
+            }
             if (!!node.id) {
                 createCellNode(node.nodeName, "#" + node.id, node.textContent);
             } else {
