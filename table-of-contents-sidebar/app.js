@@ -92,10 +92,17 @@ chrome.storage.local.get('tocs-toggle', function (data) {
             sidebar.style.display = "none";
             createHoverNode();
         });
+        var bug = createImageNode("images/bug.png", "Report Bugs", "18px");
+        bug.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            window.open('https://github.com/codedrinker/table-of-contents-sidebar/issues', '_blank');
+        });
         span.appendChild(left);
         span.appendChild(right);
         span.appendChild(close);
         span.appendChild(hover);
+        span.appendChild(bug);
         return span;
     }
 
