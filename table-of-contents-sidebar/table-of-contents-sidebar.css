@@ -1,0 +1,26 @@
+.table-of-contents-sidebar-fixed-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    padding: 5px 0 10px 15px;
+    background-color: #f1f1f1;
+    overflow-y: auto;
+    z-index: 2147483647;
+    border: 1px solid #cecece;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.table-of-contents-sidebar-menu {
+    position: fixed;
+    right: 0;
+    top: 48%;
+    height: 35px;
+    width: 35px;
+    z-index: 2147483646;
+    cursor: pointer;
+    alt: "Toggle Sidebar";
+    title: "Toggle Sidebar";
+}

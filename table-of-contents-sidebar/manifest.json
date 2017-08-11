@@ -5,6 +5,9 @@
   "description": "An outline tool, Automatically creates table of contents in the sidebar that can be clicked through, for easy document navigation.",
   "content_scripts": [
     {
+      "css": [
+        "table-of-contents-sidebar.css"
+      ],
       "js": [
         "app.js"
       ],
@@ -33,7 +36,8 @@
     "images/close.png",
     "images/hover.png",
     "images/left.png",
-    "images/right.png"
+    "images/right.png",
+    "table-of-contents-sidebar.css"
   ],
   "icons": {
     "128": "icon.png"

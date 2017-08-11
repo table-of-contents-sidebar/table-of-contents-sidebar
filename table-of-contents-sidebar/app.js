@@ -2,7 +2,7 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     // if (data.toggle == true) {
     // }
     var blocklist = ["google", "baidu.com", "stackoverflow.com", "github.com", "localhost"];
-
+    prepareLinks();
     var domain = document.domain;
     var block = false;
     for (var i = 0; i < blocklist.length; i++) {
@@ -15,19 +15,8 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     }
     var documents = document.getElementsByTagName('*');
     var fixedSidebar = document.createElement('div');
-    fixedSidebar.style.position = "fixed";
-    fixedSidebar.style.right = "0px";
-    fixedSidebar.style.top = "0px";
-    fixedSidebar.style.height = "100%";
-    fixedSidebar.style.padding = "5px 0 10px 15px";
-    fixedSidebar.style.width = "250px";
-    fixedSidebar.style.backgroundColor = "#f1f1f1";
-    fixedSidebar.style.overflowY = "auto";
-    fixedSidebar.style.zIndex = "2147483647";
-    fixedSidebar.style.border = "1px solid #cecece";
-    fixedSidebar.style.fontSize = "14px";
-    fixedSidebar.style.whiteSpace = "nowrap";
     fixedSidebar.id = "table-of-contents-sidebar-id";
+    fixedSidebar.className = "table-of-contents-sidebar-fixed-sidebar";
     fixedSidebar.appendChild(createOptionsNode());
     fixedSidebar.appendChild(document.createElement('br'));
     var iteratorAbsTop = 0;
@@ -39,9 +28,9 @@ chrome.storage.local.get('tocs-toggle', function (data) {
                 || node.nodeName == "H5" || node.nodeName == "H6"
             )) {
             var absTop = node.getBoundingClientRect().top + document.documentElement.scrollTop;
-            if (absTop < iteratorAbsTop) {
-                break;
-            }
+            // if (sidebarCount > 0 && absTop < iteratorAbsTop) {
+            //     break;
+            // }
             if (!!node.id) {
                 createCellNode(node.nodeName, "#" + node.id, node.textContent);
             } else {
@@ -54,6 +43,18 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     }
     if (sidebarCount > 2) {
         document.body.appendChild(fixedSidebar);
+    }
+    function prepareLinks() {
+        var link = document.createElement("link");
+        link.href = chrome.extension.getURL("table-of-contents-sidebar.css");
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        var headNode = document.getElementsByTagName("head");
+        if (headNode) {
+            headNode[0].appendChild(link);
+        } else {
+            document.body.appendChild(link);
+        }
     }
 
     function createOptionsNode() {
@@ -80,8 +81,8 @@ chrome.storage.local.get('tocs-toggle', function (data) {
             e.preventDefault();
             var sidebar = document.getElementById("table-of-contents-sidebar-id");
             sidebar.style.display = "none";
-            // var sidebarMenu = document.getElementById("table-of-contents-sidebar-hover-menu-id");
-            // sidebarMenu.style.display = "block";
+            var sidebarMenu = document.getElementById("table-of-contents-sidebar-hover-menu-id");
+            sidebarMenu.style.display = "block";
         });
         var hover = createImageNode("images/hover.png", "Display on Hover", "18px");
         hover.addEventListener('click', function (e) {
@@ -100,17 +101,9 @@ chrome.storage.local.get('tocs-toggle', function (data) {
 
     function createHoverNode() {
         var fixedSidebarHoverMenu = document.createElement('img');
-        fixedSidebarHoverMenu.style.position = "fixed";
-        fixedSidebarHoverMenu.style.right = "0px";
-        fixedSidebarHoverMenu.style.top = "48%";
-        fixedSidebarHoverMenu.style.height = "35px";
-        fixedSidebarHoverMenu.style.width = "35px";
-        fixedSidebarHoverMenu.style.zIndex = "2147483646";
         fixedSidebarHoverMenu.id = "table-of-contents-sidebar-hover-menu-id";
-        fixedSidebarHoverMenu.style.cursor = "pointer";
-        fixedSidebarHoverMenu.alt = "Toggle Sidebar";
-        fixedSidebarHoverMenu.title = "Toggle Sidebar";
         fixedSidebarHoverMenu.src = getImageUrl("icon.png");
+        fixedSidebarHoverMenu.className = "table-of-contents-sidebar-menu";
         document.body.appendChild(fixedSidebarHoverMenu);
         fixedSidebarHoverMenu.addEventListener('mouseover', function (e) {
             e.stopPropagation();
