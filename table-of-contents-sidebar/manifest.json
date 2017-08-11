@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Table of contents sidebar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An outline tool, Automatically creates table of contents in the sidebar that can be clicked through, for easy document navigation.",
   "content_scripts": [
     {
