@@ -23,7 +23,7 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     var sidebarCount = 0;
     for (var i = 0, l = documents.length; i < l; i++) {
         var node = documents[i];
-        if (!!node && (node.nodeName == "H1" || node.nodeName == "H2"
+        if (!!node && !!node.textContent && !!node.textContent.trim() && (node.nodeName == "H1" || node.nodeName == "H2"
                 || node.nodeName == "H3" || node.nodeName == "H4"
                 || node.nodeName == "H5" || node.nodeName == "H6"
             )) {
