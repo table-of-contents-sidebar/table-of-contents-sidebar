@@ -66,6 +66,11 @@ chrome.storage.local.get('tocs-toggle', function (data) {
             var sidebar = document.getElementById("table-of-contents-sidebar-id");
             sidebar.style.left = "0px";
             sidebar.style.right = null;
+            var sidebarMenu = document.getElementById("table-of-contents-sidebar-hover-menu-id");
+            if (sidebarMenu) {
+                sidebarMenu.style.left = "0px";
+                sidebarMenu.style.right = null;
+            }
         });
         var right = createImageNode("images/right.png", "Float Right");
         right.addEventListener('click', function (e) {
@@ -74,6 +79,11 @@ chrome.storage.local.get('tocs-toggle', function (data) {
             var sidebar = document.getElementById("table-of-contents-sidebar-id");
             sidebar.style.right = "0px";
             sidebar.style.left = null;
+            var sidebarMenu = document.getElementById("table-of-contents-sidebar-hover-menu-id");
+            if (sidebarMenu) {
+                sidebarMenu.style.right = "0px";
+                sidebarMenu.style.left = null;
+            }
         });
         var close = createImageNode("images/close.png", "Close", "18px");
         close.addEventListener('click', function (e) {
@@ -107,10 +117,15 @@ chrome.storage.local.get('tocs-toggle', function (data) {
     }
 
     function createHoverNode() {
+        var sidebar = document.getElementById("table-of-contents-sidebar-id");
+        var left = sidebar.style.left;
+        var right = sidebar.style.right;
         var fixedSidebarHoverMenu = document.createElement('img');
         fixedSidebarHoverMenu.id = "table-of-contents-sidebar-hover-menu-id";
         fixedSidebarHoverMenu.src = getImageUrl("icon.png");
         fixedSidebarHoverMenu.className = "table-of-contents-sidebar-menu";
+        fixedSidebarHoverMenu.style.left = left;
+        fixedSidebarHoverMenu.style.right = right;
         document.body.appendChild(fixedSidebarHoverMenu);
         fixedSidebarHoverMenu.addEventListener('mouseover', function (e) {
             e.stopPropagation();
