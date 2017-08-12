@@ -35,6 +35,37 @@ function generate_block_list_table(block_list) {
     var blockListTableNode = document.createElement('table');
     blockListTableNode.id = "block-list-table";
     blockListTableNode.className = "options-table";
+    var header = createTableHeader();
+    blockListTableNode.appendChild(header);
+    for (var i = 0, l = block_list.length; i < l; i++) {
+        var block_hostname = block_list[i];
+        var tr = createCellNode(block_hostname);
+        blockListTableNode.appendChild(tr);
+    }
+    document.body.appendChild(blockListTableNode);
+}
+
+function createCellNode(blockHostname) {
+    var tr = document.createElement('tr');
+    var hostnameTd = document.createElement('td');
+    hostnameTd.textContent = blockHostname;
+    var optionTd = document.createElement('td');
+    optionTd.setAttribute("data-bind", blockHostname);
+    optionTd.textContent = "Remove";
+    optionTd.style.cursor = "pointer";
+    optionTd.style.color = "blue";
+    optionTd.addEventListener("click", function (e) {
+        var hostname = e.srcElement.getAttribute("data-bind");
+        removeFromBlocklist(hostname);
+        e.srcElement.parentNode.parentNode.removeChild(e.srcElement.parentNode);
+        show_message("Remove " + hostname + " Successfully.");
+    });
+    tr.appendChild(hostnameTd);
+    tr.appendChild(optionTd);
+    return tr;
+}
+
+function createTableHeader() {
     var tr = document.createElement('tr');
     var hostnameTh = document.createElement('th');
     hostnameTh.textContent = "Hostname";
@@ -43,29 +74,7 @@ function generate_block_list_table(block_list) {
     var tr = document.createElement('tr');
     tr.appendChild(hostnameTh);
     tr.appendChild(optionTh);
-    blockListTableNode.appendChild(tr);
-    for (var i = 0, l = block_list.length; i < l; i++) {
-        var block_hostname = block_list[i];
-        var tr = document.createElement('tr');
-        var hostnameTd = document.createElement('td');
-        hostnameTd.textContent = block_hostname;
-        var optionTd = document.createElement('td');
-        optionTd.setAttribute("data-bind", block_hostname);
-        optionTd.textContent = "Remove";
-        optionTd.style.cursor = "pointer";
-        optionTd.style.color = "blue";
-        optionTd.addEventListener("click", function (e) {
-            var hostname = e.srcElement.getAttribute("data-bind");
-            removeFromBlocklist(hostname);
-            e.srcElement.parentNode.parentNode.removeChild(e.srcElement.parentNode);
-            show_message("Remove " + hostname + " Successfully.");
-        });
-        tr.appendChild(hostnameTd);
-        tr.appendChild(optionTd);
-        blockListTableNode.appendChild(tr);
-    }
-    document.body.appendChild(blockListTableNode);
-
+    return tr;
 }
 
 function removeFromBlocklist(hostname) {
