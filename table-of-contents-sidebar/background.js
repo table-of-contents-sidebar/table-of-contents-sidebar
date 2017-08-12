@@ -51,8 +51,11 @@ function refresh() {
 }
 
 function checkToggle() {
-    chrome.storage.sync.get('tocs_toggle', function (data) {
-        if (data.tocs_toggle == true) {
+    chrome.storage.sync.get({
+        tocs_toggle: true
+    }, function (items) {
+        var toggle = items.tocs_toggle;
+        if (toggle) {
             displayDisable();
             enable();
         } else {

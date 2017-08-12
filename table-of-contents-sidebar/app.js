@@ -1,6 +1,6 @@
 chrome.storage.sync.get({
     position: 'right',
-    tocs_toggle: false,
+    tocs_toggle: true,
     hover: false
 }, function (items) {
     var toggle = items.tocs_toggle;
