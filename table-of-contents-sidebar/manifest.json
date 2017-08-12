@@ -20,10 +20,11 @@
   "permissions": [
     "contextMenus",
     "storage",
-    "tabs"
+    "tabs",
+    "activeTab"
   ],
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "images/icon/icon_blue_128x128.png",
     "default_title": "Table of contents sidebar"
   },
   "background": {
@@ -32,7 +33,7 @@
     ]
   },
   "web_accessible_resources": [
-    "icon.png",
+    "images/icon/icon_blue_128x128.png",
     "images/close.png",
     "images/hover.png",
     "images/left.png",
@@ -41,6 +42,6 @@
     "table-of-contents-sidebar.css"
   ],
   "icons": {
-    "128": "icon.png"
+    "128": "images/icon/icon_blue_128x128.png"
   }
 }

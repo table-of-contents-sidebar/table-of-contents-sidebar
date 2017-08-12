@@ -1,6 +1,6 @@
-chrome.storage.local.get('tocs-toggle', function (data) {
-    // if (data.toggle == true) {
-    // }
+chrome.storage.sync.get('tocs_toggle', function (data) {
+    if (data.tocs_toggle == true) {
+    }
     var blocklist = ["google", "baidu.com", "stackoverflow.com", "github.com", "localhost"];
     prepareLinks();
     var domain = document.domain;
@@ -122,7 +122,7 @@ chrome.storage.local.get('tocs-toggle', function (data) {
         var right = sidebar.style.right;
         var fixedSidebarHoverMenu = document.createElement('img');
         fixedSidebarHoverMenu.id = "table-of-contents-sidebar-hover-menu-id";
-        fixedSidebarHoverMenu.src = getImageUrl("icon.png");
+        fixedSidebarHoverMenu.src = getImageUrl("images/icon/icon_blue_128x128.png");
         fixedSidebarHoverMenu.className = "table-of-contents-sidebar-menu";
         fixedSidebarHoverMenu.style.left = left;
         fixedSidebarHoverMenu.style.right = right;
