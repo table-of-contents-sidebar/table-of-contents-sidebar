@@ -1,11 +1,13 @@
 function save_options() {
     var position = document.getElementById('position').value;
+    var theme = document.getElementById('theme').value;
     var toggle = document.getElementById('toggle').checked;
     var hover = document.getElementById('hover').checked;
     chrome.storage.sync.set({
         position: position,
         tocs_toggle: toggle,
-        hover: hover
+        hover: hover,
+        theme: theme
     }, function () {
         show_message("Changes Saved. Some preferences will not take effect until next time the program is started");
         checkToggle();
@@ -17,9 +19,11 @@ function restore_options() {
         position: 'right',
         tocs_toggle: true,
         hover: false,
-        block_list: []
+        block_list: [],
+        theme: ""
     }, function (items) {
         document.getElementById('position').value = items.position;
+        document.getElementById('theme').value = items.theme;
         document.getElementById('toggle').checked = items.tocs_toggle;
         document.getElementById('hover').checked = items.hover;
         if (!!items.block_list && items.block_list.length != 0) {

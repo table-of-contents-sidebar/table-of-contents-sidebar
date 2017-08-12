@@ -2,15 +2,17 @@ chrome.storage.sync.get({
     position: 'right',
     tocs_toggle: true,
     hover: false,
-    block_list: []
+    block_list: [],
+    theme: ""
 }, function (items) {
     var toggle = items.tocs_toggle;
     var block_list = items.block_list;
+    var theme = items.theme;
     if (!toggle) return;
     if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
     if (nodes.length < 3) return;
-    injectCss();
+    injectCss(theme);
 
     var fixedSidebarNode = createFixedSidebarNode();
     var fixedMenuNode = createFixedMenuNode();
@@ -49,9 +51,9 @@ function restoreOptions(optionsItems, sidebar, menu) {
     }
 }
 
-function injectCss() {
+function injectCss(path) {
     var link = document.createElement("link");
-    link.href = chrome.extension.getURL("table-of-contents-sidebar.css");
+    link.href = chrome.extension.getURL(!!path ? path : "table-of-contents-sidebar.css");
     link.type = "text/css";
     link.rel = "stylesheet";
     var headNode = document.getElementsByTagName("head");

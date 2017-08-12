@@ -1,0 +1,61 @@
+.table-of-contents-sidebar-fixed-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    padding: 5px 0 10px 15px;
+    background-color: black;
+    color: white;
+    overflow-y: auto;
+    z-index: 2147483647;
+    border: 1px solid #cecece;
+    font-size: 15px;
+    white-space: nowrap;
+    opacity: 0.8;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li a {
+    color: white;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li {
+    list-style-type: none;
+    overflow-x: hidden;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H1-ANCHOR {
+    margin-left: 0px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H2-ANCHOR {
+    margin-left: 20px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H3-ANCHOR {
+    margin-left: 40px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H4-ANCHOR {
+    margin-left: 60px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H5-ANCHOR {
+    margin-left: 80px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H6-ANCHOR {
+    margin-left: 100px;
+}
+
+.table-of-contents-sidebar-menu {
+    position: fixed;
+    right: 0;
+    top: 48%;
+    height: 35px;
+    width: 35px;
+    z-index: 2147483646;
+    cursor: pointer;
+    alt: "Toggle Sidebar";
+    title: "Toggle Sidebar";
+}

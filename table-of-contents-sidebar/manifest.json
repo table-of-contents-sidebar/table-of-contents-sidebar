@@ -48,7 +48,8 @@
     "images/bug.png",
     "images/github.png",
     "table-of-contents-sidebar.css",
-    "options.html"
+    "options.html",
+    "themes/*"
   ],
   "icons": {
     "16": "images/icon/icon_blue_16x16.png",
