@@ -262,6 +262,11 @@ function createOptionsNode() {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar/issues', '_blank');
     });
+    var githubBtn = createImageNode("images/github.png", "Fork on GitHub", "18px");
+    githubBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        window.open('https://github.com/codedrinker/table-of-contents-sidebar', '_blank');
+    });
 
     optionsContainer.appendChild(leftBtn);
     optionsContainer.appendChild(rightBtn);
@@ -269,6 +274,7 @@ function createOptionsNode() {
     optionsContainer.appendChild(hoverBtn);
     optionsContainer.appendChild(optionBtn);
     optionsContainer.appendChild(bugBtn);
+    optionsContainer.appendChild(githubBtn);
     optionsContainer.appendChild(document.createElement('br'));
     return optionsContainer;
 }
@@ -299,15 +305,18 @@ function getImageUrl(name) {
 
 Node.prototype.appendChildren = function (children) {
     var that = this;
+    var ul = document.createElement("ul");
     for (var i = 0, l = children.length; i < l; i++) {
+        var li = document.createElement("li");
         var refNode = document.createElement('a');
         var text = document.createTextNode(children[i].text);
         refNode.appendChild(text);
         refNode.title = children[i].text;
         refNode.href = "#" + children[i].id;
-        var size = Number(children[i].name[1]);
-        refNode.style.marginLeft = ((size - 1 ) * 20) + "px";
-        that.appendChild(refNode);
-        that.appendChild(document.createElement('br'));
+        var className = children[i].name + "-ANCHOR";
+        refNode.className = className;
+        li.appendChild(refNode);
+        ul.appendChild(li);
     }
+    that.appendChild(ul);
 };

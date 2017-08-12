@@ -14,6 +14,35 @@
     opacity: 0.94;
 }
 
+.table-of-contents-sidebar-fixed-sidebar ul li {
+    list-style-type: none;
+    overflow-x: hidden;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H1-ANCHOR {
+    margin-left: 0px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H2-ANCHOR {
+    margin-left: 20px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H3-ANCHOR {
+    margin-left: 40px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H4-ANCHOR {
+    margin-left: 60px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H5-ANCHOR {
+    margin-left: 80px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li .H6-ANCHOR {
+    margin-left: 100px;
+}
+
 .table-of-contents-sidebar-menu {
     position: fixed;
     right: 0;
