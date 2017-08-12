@@ -35,6 +35,15 @@ function generate_block_list_table(block_list) {
     var blockListTableNode = document.createElement('table');
     blockListTableNode.id = "block-list-table";
     blockListTableNode.className = "options-table";
+    var tr = document.createElement('tr');
+    var hostnameTh = document.createElement('th');
+    hostnameTh.textContent = "Hostname";
+    var optionTh = document.createElement('th');
+    optionTh.textContent = "Option";
+    var tr = document.createElement('tr');
+    tr.appendChild(hostnameTh);
+    tr.appendChild(optionTh);
+    blockListTableNode.appendChild(tr);
     for (var i = 0, l = block_list.length; i < l; i++) {
         var block_hostname = block_list[i];
         var tr = document.createElement('tr');
