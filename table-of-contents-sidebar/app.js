@@ -1,12 +1,13 @@
 chrome.storage.sync.get({
     position: 'right',
     tocs_toggle: true,
-    hover: false
+    hover: false,
+    block_list: []
 }, function (items) {
     var toggle = items.tocs_toggle;
-
+    var block_list = items.block_list;
     if (!toggle) return;
-    if (isBlocked()) return;
+    if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
     if (nodes.length < 3) return;
     injectCss();
@@ -71,12 +72,12 @@ function fixedSidebarMenuNode() {
     return element;
 }
 
-function isBlocked() {
-    var blocklist = ["google", "baidu.com", "stackoverflow.com", "github.com", "localhost"];
+function isBlocked(block_list) {
+    if (!block_list || block_list.length == 0) return false;
     var domain = document.domain;
     var block = false;
-    for (var i = 0; i < blocklist.length; i++) {
-        if (domain.indexOf(blocklist[i]) != -1) {
+    for (var i = 0; i < block_list.length; i++) {
+        if (domain.indexOf(block_list[i]) != -1) {
             block = true;
         }
     }

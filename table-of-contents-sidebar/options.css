@@ -1,30 +1,34 @@
 #status {
-    color: red;
+    color: green;
 }
 
-#options-table {
+.options-table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#options-table td, #options-table th {
+.options-table td, .options-table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#options-table tr:nth-child(even) {
+.options-table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-#options-table tr:hover {
-    background-color: #ddd;
+.options-table tr:hover {
+    background-color: blanchedalmond;
 }
 
-#options-table th {
+.options-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background-color: gray;
     color: white;
+}
+
+#save {
+    cursor: pointer;
 }
