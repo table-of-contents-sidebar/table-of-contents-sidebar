@@ -46,5 +46,15 @@ function refresh() {
     });
 }
 
-enable();
-displayDisable();
+function checkToggle() {
+    chrome.storage.sync.get('tocs_toggle', function (data) {
+        if (data.tocs_toggle == true) {
+            enable();
+            displayDisable();
+        } else {
+            disable();
+            displayEnable();
+        }
+    });
+}
+checkToggle();

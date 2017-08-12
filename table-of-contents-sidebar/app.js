@@ -1,5 +1,6 @@
 chrome.storage.sync.get('tocs_toggle', function (data) {
-    if (data.tocs_toggle == true) {
+    if (data.tocs_toggle == false) {
+        return;
     }
     var blocklist = ["google", "baidu.com", "stackoverflow.com", "github.com", "localhost"];
     prepareLinks();

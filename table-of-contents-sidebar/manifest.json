@@ -30,7 +30,8 @@
   "background": {
     "scripts": [
       "background.js"
-    ]
+    ],
+    "persistent": true
   },
   "web_accessible_resources": [
     "images/icon/icon_blue_128x128.png",
