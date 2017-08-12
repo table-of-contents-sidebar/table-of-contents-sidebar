@@ -107,6 +107,7 @@ function parseLinkableNodes() {
             };
             matchesNodes.push(data);
             iteratorAbsTop = absTop;
+            sidebarCount++;
         }
     }
     return matchesNodes;
