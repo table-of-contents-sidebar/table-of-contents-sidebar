@@ -97,9 +97,10 @@ function parseLinkableNodes() {
             && (node.nodeName == "H1" || node.nodeName == "H2" || node.nodeName == "H3"
             || node.nodeName == "H4" || node.nodeName == "H5" || node.nodeName == "H6")) {
             var absTop = node.getBoundingClientRect().top + document.documentElement.scrollTop;
-            if (sidebarCount > 0 && absTop < iteratorAbsTop) {
-                break;
-            }
+            // comment tricky logic
+            // if (sidebarCount > 0 && absTop < iteratorAbsTop) {
+            //     break;
+            // }
             if (!node.id) {
                 node.id = uuid();
             }
