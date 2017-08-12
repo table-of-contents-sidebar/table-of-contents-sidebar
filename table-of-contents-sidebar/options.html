@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table of contents sidebar Extension Options</title>
+</head>
+<body>
+<table id="options-table">
+    <tr>
+        <th>Name</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Enable Extension</td>
+        <td><input type="checkbox" id="toggle"></td>
+    </tr>
+    <tr>
+        <td>Display on Hover</td>
+        <td><input type="checkbox" id="hover"></td>
+    </tr>
+    <tr>
+        <td>Sidebar Position</td>
+        <td>
+            <select id="position">
+                <option value="right">right</option>
+                <option value="left">left</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<button id="save">Save</button>
+<div id="status"></div>
+<script src="background.js"></script>
+<script src="options.js"></script>
+<link rel="stylesheet" href="options.css">
+</body>
+</html>

@@ -17,6 +17,11 @@
       ]
     }
   ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
   "permissions": [
     "contextMenus",
     "storage",
@@ -37,10 +42,12 @@
     "images/icon/icon_blue_128x128.png",
     "images/close.png",
     "images/hover.png",
+    "images/settings.png",
     "images/left.png",
     "images/right.png",
     "images/bug.png",
-    "table-of-contents-sidebar.css"
+    "table-of-contents-sidebar.css",
+    "options.html"
   ],
   "icons": {
     "128": "images/icon/icon_blue_128x128.png"

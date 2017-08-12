@@ -11,6 +11,7 @@
     border: 1px solid #cecece;
     font-size: 15px;
     white-space: nowrap;
+    opacity: 0.94;
 }
 
 .table-of-contents-sidebar-menu {

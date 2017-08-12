@@ -1,24 +1,26 @@
 function displayEnable() {
+    if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
     chrome.contextMenus.create({
         title: "Enable",
         contexts: ["browser_action"],
         onclick: function () {
-            enable();
             displayDisable();
+            enable();
             refresh();
         }
     });
 }
 
 function displayDisable() {
+    if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
     chrome.contextMenus.create({
         title: "Disable",
         contexts: ["browser_action"],
         onclick: function () {
-            disable();
             displayEnable();
+            disable();
             refresh();
         }
     });
@@ -27,6 +29,7 @@ function displayDisable() {
 function enable() {
     chrome.storage.sync.set({'tocs_toggle': true}, function () {
     });
+    if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
         path: "images/icon/icon_blue_128x128.png"
     });
@@ -34,6 +37,7 @@ function enable() {
 function disable() {
     chrome.storage.sync.set({'tocs_toggle': false}, function () {
     });
+    if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
         path: "images/icon/icon_gray_128x128.png"
     });
@@ -49,11 +53,11 @@ function refresh() {
 function checkToggle() {
     chrome.storage.sync.get('tocs_toggle', function (data) {
         if (data.tocs_toggle == true) {
-            enable();
             displayDisable();
+            enable();
         } else {
-            disable();
             displayEnable();
+            disable();
         }
     });
 }
