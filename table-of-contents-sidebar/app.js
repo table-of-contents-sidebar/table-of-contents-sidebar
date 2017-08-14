@@ -11,7 +11,7 @@ chrome.storage.sync.get({
     if (!toggle) return;
     if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
-    if (nodes.length < 3) return;
+    if (nodes.length <= 3) return;
     injectCss(theme);
 
     var fixedSidebarNode = createFixedSidebarNode();
@@ -97,6 +97,12 @@ function parseLinkableNodes() {
             && (node.nodeName == "H1" || node.nodeName == "H2" || node.nodeName == "H3"
             || node.nodeName == "H4" || node.nodeName == "H5" || node.nodeName == "H6")) {
             var absTop = node.getBoundingClientRect().top + document.documentElement.scrollTop;
+            if (!!matchesNodes && matchesNodes.length != 0) {
+                var previous = matchesNodes[matchesNodes.length - 1];
+                if (absTop == previous.absTop) {
+                    continue;
+                }
+            }
             // comment tricky logic
             // if (sidebarCount > 0 && absTop < iteratorAbsTop) {
             //     break;
@@ -107,7 +113,8 @@ function parseLinkableNodes() {
             var data = {
                 id: node.id,
                 text: node.textContent,
-                name: node.nodeName
+                name: node.nodeName,
+                absTop: absTop
             };
             matchesNodes.push(data);
             iteratorAbsTop = absTop;

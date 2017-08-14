@@ -40,13 +40,7 @@
   },
   "web_accessible_resources": [
     "images/icon/icon_blue_128x128.png",
-    "images/close.png",
-    "images/hover.png",
-    "images/settings.png",
-    "images/left.png",
-    "images/right.png",
-    "images/bug.png",
-    "images/github.png",
+    "images/*",
     "table-of-contents-sidebar.css",
     "options.html",
     "themes/*"

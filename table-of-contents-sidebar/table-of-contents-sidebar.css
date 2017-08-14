@@ -14,6 +14,16 @@
     opacity: 0.94;
 }
 
+.table-of-contents-sidebar-fixed-sidebar span img {
+    display: inline-block;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul {
+    padding: 0 10px 10px 6px;
+    margin: 6px 0 0 0;
+    line-height: 1.5;
+}
+
 .table-of-contents-sidebar-fixed-sidebar ul li {
     list-style-type: none;
     overflow-x: hidden;
