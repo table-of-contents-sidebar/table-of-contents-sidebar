@@ -18,7 +18,7 @@ function restore_options() {
     chrome.storage.sync.get({
         position: 'right',
         tocs_toggle: true,
-        hover: false,
+        hover: true,
         block_list: [],
         theme: ""
     }, function (items) {
