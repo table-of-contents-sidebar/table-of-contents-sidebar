@@ -11,7 +11,7 @@ function displayEnable() {
         }
     });
     chrome.contextMenus.create({
-        "title": "Add to Block List",
+        "title": "Disable on the current domain",
         "contexts": ["page"],
         "onclick": function (info) {
             add2blocklist(info.pageUrl);
@@ -23,7 +23,7 @@ function displayDisable() {
     if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
     chrome.contextMenus.create({
-        "title": "Add to Block List",
+        "title": "Disable on the current domain",
         "contexts": ["page"],
         "onclick": function (info) {
             add2blocklist(info.pageUrl);
