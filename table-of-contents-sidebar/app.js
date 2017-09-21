@@ -1,12 +1,3 @@
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-89103576-4']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
 chrome.storage.sync.get({
     position: 'right',
     tocs_toggle: true,
@@ -29,11 +20,6 @@ chrome.storage.sync.get({
     restoreOptions(items, fixedSidebarNode, fixedMenuNode);
     document.body.appendChild(fixedSidebarNode);
     document.body.appendChild(fixedMenuNode);
-    try {
-        _gaq.push(['_trackEvent', document.domain, 'display']);
-    } catch (e) {
-        console.log("ga error", e)
-    }
 });
 function restoreOptions(optionsItems, sidebar, menu) {
     if (optionsItems) {
