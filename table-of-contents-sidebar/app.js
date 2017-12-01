@@ -21,6 +21,8 @@ chrome.storage.sync.get({
     document.body.appendChild(fixedSidebarNode);
     document.body.appendChild(fixedMenuNode);
 });
+var fixedHeight = 0;
+
 function restoreOptions(optionsItems, sidebar, menu) {
     if (optionsItems) {
         var position = optionsItems.position;
@@ -96,6 +98,12 @@ function parseLinkableNodes() {
     var matchesNodes = [];
     for (var i = 0, l = documents.length; i < l; i++) {
         var node = documents[i];
+        var style = window.getComputedStyle(node,null);
+        var position = style.getPropertyValue("position");
+        var top =  style.getPropertyValue("top");
+        if(position == "fixed" && top == "0px") {
+            fixedHeight += node.offsetHeight;
+        }
         if (!!node && !!node.textContent && !!node.textContent.trim()
             && (node.nodeName == "H1" || node.nodeName == "H2" || node.nodeName == "H3"
             || node.nodeName == "H4" || node.nodeName == "H5" || node.nodeName == "H6")) {
@@ -349,6 +357,17 @@ Node.prototype.appendChildren = function (children) {
         refNode.href = "#" + children[i].id;
         var className = children[i].name + "-ANCHOR";
         refNode.className = className;
+        refNode.addEventListener('click', function (e) {
+            e.preventDefault();
+            var id = e.srcElement.hash.substr(1);
+            var doc = document.getElementById(id);
+            var top = doc.getBoundingClientRect().top + window.scrollY - fixedHeight;
+            window.scroll({
+                  top: top,
+                  left: 0, 
+                  behavior: 'smooth' 
+                });
+         });
         li.appendChild(refNode);
         ul.appendChild(li);
     }
