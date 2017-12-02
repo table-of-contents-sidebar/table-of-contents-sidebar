@@ -23,6 +23,22 @@ chrome.storage.sync.get({
 });
 var fixedHeight = 0;
 
+window.onscroll = function() {
+    var height = 0;
+    var documents = document.getElementsByTagName('*');
+    for (var i = 0, l = documents.length; i < l; i++) {
+        var node = documents[i];
+        if(node.id == "table-of-contents-sidebar-id") continue;
+        var style = window.getComputedStyle(node,null);
+        var position = style.getPropertyValue("position");
+        var top =  style.getPropertyValue("top");
+        if(position == "fixed" && top == "0px") {
+            height += node.offsetHeight;
+        }
+     }
+     fixedHeight = height;
+}
+
 function restoreOptions(optionsItems, sidebar, menu) {
     if (optionsItems) {
         var position = optionsItems.position;
