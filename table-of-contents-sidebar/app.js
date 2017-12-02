@@ -37,6 +37,19 @@ window.onscroll = function() {
         }
      }
      fixedHeight = height;
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        rebuildAnchors();
+    }
+}
+
+function rebuildAnchors() {
+    var nodes = parseLinkableNodes();
+    if (nodes.length <= 3) return;
+    var anchorList = document.getElementById("table-of-contents-sidebar-anchor-list-id");
+    while (anchorList.firstChild) {
+        anchorList.removeChild(anchorList.firstChild);
+    }
+    appendAnchorItems(anchorList,nodes);
 }
 
 function restoreOptions(optionsItems, sidebar, menu) {
@@ -361,9 +374,7 @@ function getImageUrl(name) {
     return image;
 }
 
-Node.prototype.appendChildren = function (children) {
-    var that = this;
-    var ul = document.createElement("ul");
+function appendAnchorItems(anchorList, children) {
     for (var i = 0, l = children.length; i < l; i++) {
         var li = document.createElement("li");
         var refNode = document.createElement('a');
@@ -385,7 +396,14 @@ Node.prototype.appendChildren = function (children) {
                 });
          });
         li.appendChild(refNode);
-        ul.appendChild(li);
+        anchorList.appendChild(li);
     }
+}
+
+Node.prototype.appendChildren = function (children) {
+    var that = this;
+    var ul = document.createElement("ul");
+    ul.id = "table-of-contents-sidebar-anchor-list-id";
+    appendAnchorItems(ul, children);
     that.appendChild(ul);
 };
