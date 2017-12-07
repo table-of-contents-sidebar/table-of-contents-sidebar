@@ -22,6 +22,7 @@ chrome.storage.sync.get({
     document.body.appendChild(fixedMenuNode);
 });
 var fixedHeight = 0;
+var isOverflow = false;
 
 window.onscroll = function() {
     var height = 0;
@@ -32,7 +33,7 @@ window.onscroll = function() {
         var style = window.getComputedStyle(node,null);
         var position = style.getPropertyValue("position");
         var top =  style.getPropertyValue("top");
-        if(position == "fixed" && top == "0px") {
+        if(position == "fixed" && top == "0px" && node.offsetHeight < 200) {
             height += node.offsetHeight;
         }
      }
@@ -117,13 +118,16 @@ function parseLinkableNodes() {
         var style = window.getComputedStyle(node,null);
         var position = style.getPropertyValue("position");
         var top =  style.getPropertyValue("top");
-        if(position == "fixed" && top == "0px") {
+        if(position == "fixed" && top == "0px" && node.offsetHeight < 200) {
             fixedHeight += node.offsetHeight;
         }
         if (!!node && !!node.textContent && !!node.textContent.trim()
             && (node.nodeName == "H1" || node.nodeName == "H2" || node.nodeName == "H3"
             || node.nodeName == "H4" || node.nodeName == "H5" || node.nodeName == "H6")) {
             var absTop = node.getBoundingClientRect().top + document.documentElement.scrollTop;
+            if(absTop > document.body.offsetHeight){
+                isOverflow = true;
+            }
             if (!!matchesNodes && matchesNodes.length != 0) {
                 var previous = matchesNodes[matchesNodes.length - 1];
                 if (absTop == previous.absTop) {
@@ -378,11 +382,15 @@ Node.prototype.appendChildren = function (children) {
             var id = e.srcElement.hash.substr(1);
             var doc = document.getElementById(id);
             var top = doc.getBoundingClientRect().top + window.scrollY - fixedHeight;
-            window.scroll({
+            if(isOverflow){
+                window.location.hash = e.srcElement.hash; 
+            } else {
+                window.scroll({
                   top: top,
                   left: 0, 
-                  behavior: 'smooth' 
+                  behavior: 'smooth'
                 });
+            }
          });
         li.appendChild(refNode);
         ul.appendChild(li);
