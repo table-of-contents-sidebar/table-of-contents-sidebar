@@ -66,7 +66,7 @@ var Tooltip = {
         }
         
         Tooltip.tooltip.style.left = pos_left + 'px';
-        Tooltip.tooltip.style.top = pos_top + 'px';
+        Tooltip.tooltip.style.top = pos_top  + 2 + 'px';
         Tooltip.tooltip.className += ' show';
     },
     hide: function() {
@@ -384,7 +384,7 @@ function createCopyrightNode() {
     majiang.title = "Majiang";
     majiang.href = "http://www.majiang.life";
     majiang.target = "_blank";
-    var copyright = document.createTextNode("©copyright ");
+    var copyright = document.createTextNode("Powered by ");
     var and = document.createTextNode(" & ");
     span.appendChild(copyright);
     span.appendChild(yiting);
