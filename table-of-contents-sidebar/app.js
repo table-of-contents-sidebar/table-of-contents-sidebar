@@ -299,7 +299,9 @@ function activeUnpin(sidebar, menu) {
     var sidebar = !!sidebar ? sidebar : fixedSidebarNode();
     var menu = !!menu ? menu : fixedSidebarMenuNode();
     if (sidebar) {
-        sidebar.style.width = '0';
+        // sidebar.style.width = '0';
+        sidebar.addEventListener('mouseout', sidebarMouseOutEvent);
+        sidebar.addEventListener('mouseover', sidebarMouseOverEvent);
     }
     if (menu) {
         menu.style.display = "block";
