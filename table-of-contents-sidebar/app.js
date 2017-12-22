@@ -49,7 +49,6 @@ var Tooltip = {
         var pos_left = Tooltip.target.offsetLeft + ( Tooltip.target.offsetWidth / 2 ) - ( Tooltip.tooltip.offsetWidth / 2 ),
             pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 20;
         Tooltip.tooltip.className = '';
-        console.log('('+pos_left+', '+pos_top+')')
 
         if( pos_left < 0 ) {
             pos_left = Tooltip.target.offsetLeft + Tooltip.target.offsetWidth / 2 - 20;
@@ -283,6 +282,9 @@ function activeLeft(sidebar, menu) {
             e.stopPropagation();
             activeRight();
         });
+        positionNode.tooltip = "Right";
+        positionNode.addEventListener('mouseover', Tooltip.show);
+        positionNode.addEventListener('mouseleave', Tooltip.hide);
     }
     var sidebar = !!sidebar ? sidebar : fixedSidebarNode();
     var menu = !!menu ? menu : fixedSidebarMenuNode();
@@ -303,6 +305,9 @@ function activeRight(sidebar, menu) {
             e.stopPropagation();
             activeLeft();
         });
+        positionNode.tooltip = "Left";
+        positionNode.addEventListener('mouseover', Tooltip.show);
+        positionNode.addEventListener('mouseleave', Tooltip.hide);
     }
     var sidebar = !!sidebar ? sidebar : fixedSidebarNode();
     var menu = !!menu ? menu : fixedSidebarMenuNode();
@@ -323,6 +328,9 @@ function activePin(sidebar, menu) {
             e.stopPropagation();
             activeUnpin();
         });
+        pinNode.tooltip = "Pin";
+        pinNode.addEventListener('mouseover', Tooltip.show);
+        pinNode.addEventListener('mouseleave', Tooltip.hide);
     }
     var sidebar = !!sidebar ? sidebar : fixedSidebarNode();
     var menu = !!menu ? menu : fixedSidebarMenuNode();
@@ -345,6 +353,9 @@ function activeUnpin(sidebar, menu) {
             e.stopPropagation();
             activePin();
         });
+        pinNode.tooltip = "Unpin";
+        pinNode.addEventListener('mouseover', Tooltip.show);
+        pinNode.addEventListener('mouseleave', Tooltip.hide);
     }
     var sidebar = !!sidebar ? sidebar : fixedSidebarNode();
     var menu = !!menu ? menu : fixedSidebarMenuNode();
@@ -393,11 +404,17 @@ function createOptionsNode(isUnpin,position) {
             e.stopPropagation();
             activeLeft();
         });
+        leftBtn.tooltip = "Left";
+        leftBtn.addEventListener('mouseover', Tooltip.show);
+        leftBtn.addEventListener('mouseleave', Tooltip.hide);
     } else {
         leftBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             activeRight();
         });
+        leftBtn.tooltip = "Right";
+        leftBtn.addEventListener('mouseover', Tooltip.show);
+        leftBtn.addEventListener('mouseleave', Tooltip.hide);
     }
 
     var pinBtn = createImageNode("images/unpin.png", "Pin");
@@ -408,11 +425,17 @@ function createOptionsNode(isUnpin,position) {
             e.stopPropagation();
             activeUnpin();
         });
+        pinBtn.tooltip = "Pin";
+        pinBtn.addEventListener('mouseover', Tooltip.show);
+        pinBtn.addEventListener('mouseleave', Tooltip.hide);
     } else {
         pinBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             activePin();
         });
+        pinBtn.tooltip = "Unpin";
+        pinBtn.addEventListener('mouseover', Tooltip.show);
+        pinBtn.addEventListener('mouseleave', Tooltip.hide);
     }
 
     var optionBtn = createImageNode("images/settings.png", "Settings");
@@ -425,11 +448,18 @@ function createOptionsNode(isUnpin,position) {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar/issues', '_blank');
     });
+    bugBtn.tooltip = "Report Bug";
+    bugBtn.addEventListener('mouseover', Tooltip.show);
+    bugBtn.addEventListener('mouseleave', Tooltip.hide);
+
     var githubBtn = createImageNode("images/github.png", "Fork on GitHub");
     githubBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar', '_blank');
     });
+    githubBtn.tooltip = "Source Code";
+    githubBtn.addEventListener('mouseover', Tooltip.show);
+    githubBtn.addEventListener('mouseleave', Tooltip.hide);
 
     optionsContainer.appendChild(leftBtn);
     optionsContainer.appendChild(pinBtn);
@@ -446,8 +476,6 @@ function createImageNode(url, title, size) {
     image.style.height = !!size ? size : "22px";
     image.style.width = !!size ? size : "22px";
     image.style.cursor = "pointer";
-    image.alt = title;
-    image.title = title;
     image.src = getImageUrl(url);
     return image;
 }
