@@ -18,12 +18,62 @@ chrome.storage.sync.get({
     fixedSidebarNode.appendChild(createOptionsNode(items.hover, items.position));
     fixedSidebarNode.appendChildren(nodes);
     fixedSidebarNode.appendChild(createCopyrightNode());
+    var doc = document.createElement("div");
+    doc.id = "table-of-contents-sidebar-fixed-sidebar-tooltip";
+    fixedSidebarNode.appendChild(doc);
     restoreOptions(items, fixedSidebarNode, fixedMenuNode);
     document.body.appendChild(fixedSidebarNode);
     document.body.appendChild(fixedMenuNode);
+    Tooltip.tooltip = document.getElementById('table-of-contents-sidebar-fixed-sidebar-tooltip');
 });
 var fixedHeight = 0;
 var isOverflow = false;
+
+var Tooltip = {
+    tooltip: undefined,
+    target: undefined,
+    show: function() {
+        Tooltip.target = this;
+        var tip = Tooltip.target['tooltip'];
+        if( !tip || tip == '' ) {            
+            return false;
+        }
+        Tooltip.tooltip.innerHTML = tip ;
+        if( window.innerWidth < Tooltip.tooltip.offsetWidth * 1.5 ) {
+            Tooltip.tooltip.style.maxWidth = (window.innerWidth / 2)+'px';
+        }
+        else {
+            Tooltip.tooltip.style.maxWidth = 250 + 'px';
+        }
+        
+        var pos_left = Tooltip.target.offsetLeft + ( Tooltip.target.offsetWidth / 2 ) - ( Tooltip.tooltip.offsetWidth / 2 ),
+            pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 20;
+        Tooltip.tooltip.className = '';
+        console.log('('+pos_left+', '+pos_top+')')
+
+        if( pos_left < 0 ) {
+            pos_left = Tooltip.target.offsetLeft + Tooltip.target.offsetWidth / 2 - 20;
+            Tooltip.tooltip.className += ' left';
+        }
+        
+        if( pos_left + Tooltip.tooltip.offsetWidth > window.innerWidth ) {
+            pos_left = Tooltip.target.offsetLeft - Tooltip.tooltip.offsetWidth + Tooltip.target.offsetWidth / 2 + 20;
+            Tooltip.tooltip.className +=' right';
+        }
+        
+        if( pos_top < 0 ) {
+            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight;
+            Tooltip.tooltip.className += ' top';
+        }
+        
+        Tooltip.tooltip.style.left = pos_left + 'px';
+        Tooltip.tooltip.style.top = pos_top + 'px';
+        Tooltip.tooltip.className += ' show';
+    },
+    hide: function() {
+        Tooltip.tooltip.className = Tooltip.tooltip.className.replace('show', '');
+    }
+};
 
 window.onscroll = function() {
     var height = 0;
@@ -422,16 +472,18 @@ Node.prototype.appendChildren = function (children) {
         var refNode = document.createElement('a');
         var text = document.createTextNode(children[i].text);
         refNode.appendChild(text);
-        refNode.title = children[i].text;
+        refNode.tooltip = children[i].text;
         refNode.href = "#" + children[i].id;
         var className = children[i].name + "-ANCHOR";
         refNode.className = className;
+        refNode.addEventListener('mouseover', Tooltip.show);
+        refNode.addEventListener('mouseleave', Tooltip.hide);
         refNode.addEventListener('click', function (e) {
             e.preventDefault();
             var id = e.srcElement.hash.substr(1);
             var doc = document.getElementById(id);
             var top = doc.getBoundingClientRect().top + window.scrollY - fixedHeight;
-            if(isOverflow){
+            if(isOverflow) {
                 window.location.hash = e.srcElement.hash; 
             } else {
                 window.scroll({
