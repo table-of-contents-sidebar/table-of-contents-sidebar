@@ -169,7 +169,7 @@ function createFixedSidebarNode() {
 
 function createFixedMenuNode() {
     var sidebar = fixedSidebarNode();
-    var left = null, right = "0px";
+    var left = null, right = "18px";
     if (sidebar) {
         sidebar.style.left;
         sidebar.style.right;
@@ -241,7 +241,7 @@ function activeLeft(sidebar, menu) {
         sidebar.style.right = null;
     }
     if (menu) {
-        menu.style.left = "0px";
+        menu.style.left = "18px";
         menu.style.right = null;
     }
 }
@@ -261,7 +261,7 @@ function activeRight(sidebar, menu) {
         sidebar.style.left = null;
     }
     if (menu) {
-        menu.style.right = "0px";
+        menu.style.right = "18px";
         menu.style.left = null;
     }
 }

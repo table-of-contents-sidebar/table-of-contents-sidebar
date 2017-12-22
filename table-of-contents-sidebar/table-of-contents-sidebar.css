@@ -60,7 +60,6 @@
 
 .table-of-contents-sidebar-fixed-sidebar .copyright {
     right: 14px;
-    position: absolute;
     color: #7C8A9B;
     font-size: 11px;
     bottom: 12px;
@@ -68,12 +67,10 @@
 
 .table-of-contents-sidebar-menu {
     position: fixed;
-    right: 0;
+    right: 18px;
     top: 48%;
     height: 35px;
     width: 35px;
     z-index: 2147483646;
     cursor: pointer;
-    alt: "Toggle Sidebar";
-    title: "Toggle Sidebar";
 }
