@@ -333,7 +333,7 @@ function createCopyrightNode() {
 function createOptionsNode(isUnpin,position) {
     var optionsContainer = createSpanNode("");
 
-    var leftBtn = createImageNode("images/right.png", "Right", "18px");
+    var leftBtn = createImageNode("images/right.png", "Right");
     leftBtn.id = "table-of-contents-sidebar-position-id";
     if (!!position && position == "right") {
         leftBtn.src = getImageUrl("images/left.png");
@@ -348,7 +348,7 @@ function createOptionsNode(isUnpin,position) {
         });
     }
 
-    var pinBtn = createImageNode("images/unpin.png", "Pin", "18px");
+    var pinBtn = createImageNode("images/unpin.png", "Pin");
     pinBtn.id = "table-of-contents-sidebar-pin-id";
     if (!isUnpin) {
         pinBtn.src = getImageUrl("images/pin.png");
@@ -363,17 +363,17 @@ function createOptionsNode(isUnpin,position) {
         });
     }
 
-    var optionBtn = createImageNode("images/settings.png", "Settings", "18px");
+    var optionBtn = createImageNode("images/settings.png", "Settings");
     optionBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         window.open(chrome.runtime.getURL('options.html'), '_blank');
     });
-    var bugBtn = createImageNode("images/bug.png", "Report Bugs", "18px");
+    var bugBtn = createImageNode("images/bug.png", "Report Bugs");
     bugBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar/issues', '_blank');
     });
-    var githubBtn = createImageNode("images/github.png", "Fork on GitHub", "18px");
+    var githubBtn = createImageNode("images/github.png", "Fork on GitHub");
     githubBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar', '_blank');
@@ -390,9 +390,9 @@ function createOptionsNode(isUnpin,position) {
 
 function createImageNode(url, title, size) {
     var image = document.createElement('img');
-    image.style.marginLeft = "5px";
-    image.style.height = !!size ? size : "20px";
-    image.style.width = !!size ? size : "20px";
+    image.style.marginLeft = "15px";
+    image.style.height = !!size ? size : "24px";
+    image.style.width = !!size ? size : "24px";
     image.style.cursor = "pointer";
     image.alt = title;
     image.title = title;
