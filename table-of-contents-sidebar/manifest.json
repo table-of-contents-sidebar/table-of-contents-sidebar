@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Table of contents sidebar",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "An outline tool, Automatically creates table of contents in the sidebar that can be clicked through, for easy document navigation.",
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "content_scripts": [
@@ -18,11 +18,11 @@
       ]
     }
   ],
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true,
-    "open_in_tab": true
-  },
+  // "options_ui": {
+  //   "page": "options.html",
+  //   "chrome_style": true,
+  //   "open_in_tab": true
+  // },
   "permissions": [
     "contextMenus",
     "storage",
@@ -30,7 +30,7 @@
     "activeTab"
   ],
   "browser_action": {
-    "default_icon": "images/icon/icon_blue_128x128.png",
+    "default_icon": "images/icon/ic_enable.png",
     "default_title": "Table of contents sidebar"
   },
   "background": {
@@ -47,8 +47,6 @@
     "themes/*"
   ],
   "icons": {
-    "16": "images/icon/icon_blue_16x16.png",
-    "48": "images/icon/icon_blue_48x48.png",
-    "128": "images/icon/icon_blue_128x128.png"
+    "128": "images/icon/ic_enable.png"
   }
 }

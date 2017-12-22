@@ -1,10 +1,10 @@
 .table-of-contents-sidebar-fixed-sidebar {
+    transition: all 0.25s linear;
     position: fixed;
     right: 0;
     top: 0;
     height: 100%;
-    width: 250px;
-    padding: 5px 0 10px 15px;
+    width: 0;
     background-color: #f1f1f1;
     overflow-y: auto;
     z-index: 2147483647;
@@ -18,9 +18,14 @@
     display: inline-block;
 }
 
+.table-of-contents-sidebar-fixed-sidebar span {
+    display: inline-block;
+    margin: 5px 0 0 10px;
+}
+
 .table-of-contents-sidebar-fixed-sidebar ul {
     padding: 0 10px 10px 6px;
-    margin: 6px 0 0 0;
+    margin: 0;
     line-height: 1.5;
 }
 
@@ -51,6 +56,14 @@
 
 .table-of-contents-sidebar-fixed-sidebar ul li .H6-ANCHOR {
     margin-left: 100px;
+}
+
+.table-of-contents-sidebar-fixed-sidebar .copyright {
+    right: 14px;
+    position: absolute;
+    color: #7C8A9B;
+    font-size: 11px;
+    bottom: 12px;
 }
 
 .table-of-contents-sidebar-menu {
