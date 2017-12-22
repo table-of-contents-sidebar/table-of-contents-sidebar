@@ -72,10 +72,11 @@
 }
 
 .table-of-contents-sidebar-fixed-sidebar .copyright {
-    right: 14px;
     color: #7C8A9B;
-    font-size: 11px;
-    bottom: 12px;
+    font-size: 11px;   
+    float: right;
+    margin-right: 15px;
+    margin-bottom: 10px;
 }
 
 .table-of-contents-sidebar-menu {
