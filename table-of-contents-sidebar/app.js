@@ -390,9 +390,9 @@ function createOptionsNode(isUnpin,position) {
 
 function createImageNode(url, title, size) {
     var image = document.createElement('img');
-    image.style.marginLeft = "15px";
-    image.style.height = !!size ? size : "24px";
-    image.style.width = !!size ? size : "24px";
+    image.style.marginLeft = "12px";
+    image.style.height = !!size ? size : "22px";
+    image.style.width = !!size ? size : "22px";
     image.style.cursor = "pointer";
     image.alt = title;
     image.title = title;
