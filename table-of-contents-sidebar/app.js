@@ -509,7 +509,7 @@ Node.prototype.appendChildren = function (children) {
         refNode.addEventListener('click', function (e) {
             e.preventDefault();
             var id = e.srcElement.hash.substr(1);
-            var doc = document.getElementById(id);
+            var doc = document.getElementById(decodeURIComponent(id));
             var top = doc.getBoundingClientRect().top + window.scrollY - fixedHeight;
             if(isOverflow) {
                 window.location.hash = e.srcElement.hash; 
