@@ -1,5 +1,5 @@
 .table-of-contents-sidebar-fixed-sidebar {
-    transition: all 0.25s linear;
+    transition: width 0.25s linear;
     position: fixed;
     right: 0;
     top: 0;
@@ -8,7 +8,6 @@
     background-color: white !important;
     overflow-y: auto;
     z-index: 2147483646;
-    border: 1px solid #cecece;
     font-size: 15px;
     white-space: nowrap;
     opacity: 1;
