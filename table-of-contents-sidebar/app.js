@@ -393,12 +393,12 @@ function createCopyrightNode() {
     var yiting = document.createElement('a');
     yiting.appendChild(document.createTextNode("Yiting"));
     yiting.title = "Yiting";
-    yiting.href = "https://yiting.myportfolio.com";
+    yiting.href = "https://yiting.myportfolio.com?utm_source=toc";
     yiting.target = "_blank";
     var majiang = document.createElement('a');
     majiang.appendChild(document.createTextNode("Majiang"));
     majiang.title = "Majiang";
-    majiang.href = "http://www.majiang.life";
+    majiang.href = "http://www.majiang.life?utm_source=toc";
     majiang.target = "_blank";
     var copyright = document.createTextNode("Powered by ");
     var and = document.createTextNode(" & ");
