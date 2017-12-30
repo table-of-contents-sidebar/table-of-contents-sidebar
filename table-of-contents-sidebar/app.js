@@ -11,7 +11,6 @@ chrome.storage.sync.get({
     if (!toggle) return;
     if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
-    if (nodes.length <= 3) return;
     injectCss(theme);
     var fixedSidebarNode = createFixedSidebarNode();
     var fixedMenuNode = createFixedMenuNode();
@@ -162,11 +161,27 @@ function isBlocked(block_list) {
     return block;
 }
 
+function addNode(root, node) {
+    if (!!root && !!root.nodes && root.nodes.length != 0) {
+        var lastNode = root.nodes[root.nodes.length - 1];
+        if (lastNode.name == node.name) {
+            root.nodes.push(node);
+        } else if (lastNode.name < node.name) {
+            addNode(lastNode, node);
+        } else {
+            root.nodes.push(node);
+        }
+    } else {
+        root.nodes = [node];
+    }
+}
+
 function parseLinkableNodes() {
     var documents = document.getElementsByTagName('*');
     var iteratorAbsTop = 0;
     var sidebarCount = 0;
     var matchesNodes = [];
+    var root = {nodes: []};
     for (var i = 0, l = documents.length; i < l; i++) {
         var node = documents[i];
         var style = window.getComputedStyle(node,null);
@@ -201,12 +216,13 @@ function parseLinkableNodes() {
                 name: node.nodeName,
                 absTop: absTop
             };
+            addNode(root, data);
             matchesNodes.push(data);
             iteratorAbsTop = absTop;
             sidebarCount++;
         }
     }
-    return matchesNodes;
+    return root;
 }
 
 function createFixedSidebarNode() {
@@ -492,37 +508,50 @@ function getImageUrl(name) {
     return image;
 }
 
-Node.prototype.appendChildren = function (children) {
-    var that = this;
-    var ul = document.createElement("ul");
-    for (var i = 0, l = children.length; i < l; i++) {
-        var li = document.createElement("li");
-        var refNode = document.createElement('a');
-        var text = document.createTextNode(children[i].text);
-        refNode.appendChild(text);
-        refNode.tooltip = children[i].text;
-        refNode.href = "#" + children[i].id;
-        var className = children[i].name + "-ANCHOR";
-        refNode.className = className;
-        refNode.addEventListener('mouseover', Tooltip.show);
-        refNode.addEventListener('mouseleave', Tooltip.hide);
-        refNode.addEventListener('click', function (e) {
-            e.preventDefault();
-            var id = e.srcElement.hash.substr(1);
-            var doc = document.getElementById(decodeURIComponent(id));
-            var top = doc.getBoundingClientRect().top + window.scrollY - fixedHeight;
-            if(isOverflow) {
-                window.location.hash = e.srcElement.hash; 
-            } else {
-                window.scroll({
-                  top: top,
-                  left: 0, 
-                  behavior: 'smooth'
-                });
+function parseNodes(parent,node,index) {
+    if (!!node) {
+        if(!!node.text) {
+            var li = document.createElement("li");
+            var className = "ANCHOR-" + index;
+            li.className = className;
+            var refNode = document.createElement('a');
+            var text = document.createTextNode(node.text);
+            refNode.appendChild(text);
+            refNode.tooltip = node.text;
+            refNode.href = "#" + node.id;
+            refNode.addEventListener('mouseover', Tooltip.show);
+            refNode.addEventListener('mouseleave', Tooltip.hide);
+            refNode.addEventListener('click', function (e) {
+                e.preventDefault();
+                var id = e.srcElement.hash.substr(1);
+                var doc = document.getElementById(decodeURIComponent(id));
+                var top = doc.getBoundingClientRect().top + window.scrollY - fixedHeight;
+                if(isOverflow) {
+                    window.location.hash = e.srcElement.hash; 
+                } else {
+                    window.scroll({
+                      top: top,
+                      left: 0, 
+                      behavior: 'smooth'
+                    });
+                }
+             });
+             li.appendChild(refNode);
+             parent.appendChild(li);
+        }
+        index++;
+        if (!!node.nodes && node.nodes.length != 0)
+            for (var i = 0; i < node.nodes.length; i++) {
+                parseNodes(parent, node.nodes[i], index);
             }
-         });
-        li.appendChild(refNode);
-        ul.appendChild(li);
     }
-    that.appendChild(ul);
+}
+
+Node.prototype.appendChildren = function (root) {
+    var that = this;
+    if (!!root) {
+        var ul = document.createElement("ul");
+        parseNodes(ul,root,0);
+        that.appendChild(ul);
+    }
 };
