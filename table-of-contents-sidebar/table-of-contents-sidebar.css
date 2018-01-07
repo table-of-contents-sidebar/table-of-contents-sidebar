@@ -1,4 +1,5 @@
 .table-of-contents-sidebar-fixed-sidebar {
+    font-family: roboto;
     transition: width 0.25s linear;
     position: fixed;
     right: 0;
@@ -83,7 +84,8 @@
     display: inline-block !important;    
     margin-left: 20px !important;
     margin-bottom: 10px !important;
-    line-height: normal !important;
+    line-height: normal !important;    
+    border: none !important;
 }
 
 .table-of-contents-sidebar-fixed-sidebar .copyright a:link {
