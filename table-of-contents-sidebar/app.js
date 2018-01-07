@@ -38,34 +38,26 @@ var Tooltip = {
             return false;
         }
         Tooltip.tooltip.innerHTML = tip ;
-        if( window.innerWidth < Tooltip.tooltip.offsetWidth * 1.5 ) {
-            Tooltip.tooltip.style.maxWidth = (window.innerWidth / 2)+'px';
-        }
-        else {
-            Tooltip.tooltip.style.maxWidth = 250 + 'px';
-        }
-        
-        var pos_left = Tooltip.target.offsetLeft + ( Tooltip.target.offsetWidth / 2 ) - ( Tooltip.tooltip.offsetWidth / 2 ),
-            pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 20;
+        var pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 10;
+        var pos_left = 0;
         Tooltip.tooltip.className = '';
-
-        if( pos_left < 0 ) {
-            pos_left = Tooltip.target.offsetLeft + Tooltip.target.offsetWidth / 2 - 20;
-            Tooltip.tooltip.className += ' left';
+        if(Tooltip.tooltip.offsetWidth > 240) {
+            Tooltip.tooltip.style.maxWidth = 240 + 'px';
         }
-        
-        if( pos_left + Tooltip.tooltip.offsetWidth > window.innerWidth ) {
-            pos_left = Tooltip.target.offsetLeft - Tooltip.tooltip.offsetWidth + Tooltip.target.offsetWidth / 2 + 20;
-            Tooltip.tooltip.className +=' right';
+
+        if(Tooltip.target.offsetWidth > 200) {
+            pos_left = 0;
+        }else if((Tooltip.target.offsetLeft + ( Tooltip.target.offsetWidth / 2 )) > (Tooltip.tooltip.offsetWidth / 2) && (250 - Tooltip.target.offsetLeft + ( Tooltip.target.offsetWidth / 2 )) > (Tooltip.tooltip.offsetWidth / 2)){
+            pos_left = Tooltip.target.offsetLeft + ( Tooltip.target.offsetWidth / 2 ) - ( Tooltip.tooltip.offsetWidth / 2 );
         }
         
         if( pos_top < 0 ) {
-            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight;
+            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight - 5;
             Tooltip.tooltip.className += ' top';
         }
         
         Tooltip.tooltip.style.left = pos_left + 'px';
-        Tooltip.tooltip.style.top = pos_top  + 2 + 'px';
+        Tooltip.tooltip.style.top = pos_top + 'px';
         Tooltip.tooltip.className += ' show';
     },
     hide: function() {
@@ -344,7 +336,7 @@ function activePin(sidebar, menu) {
             e.stopPropagation();
             activeUnpin();
         });
-        pinNode.tooltip = "Pin";
+        pinNode.tooltip = "Unpin";
         pinNode.addEventListener('mouseover', Tooltip.show);
         pinNode.addEventListener('mouseleave', Tooltip.hide);
     }
@@ -369,7 +361,7 @@ function activeUnpin(sidebar, menu) {
             e.stopPropagation();
             activePin();
         });
-        pinNode.tooltip = "Unpin";
+        pinNode.tooltip = "Pin";
         pinNode.addEventListener('mouseover', Tooltip.show);
         pinNode.addEventListener('mouseleave', Tooltip.hide);
     }
@@ -441,7 +433,7 @@ function createOptionsNode(isUnpin,position) {
             e.stopPropagation();
             activeUnpin();
         });
-        pinBtn.tooltip = "Pin";
+        pinBtn.tooltip = "Unpin";
         pinBtn.addEventListener('mouseover', Tooltip.show);
         pinBtn.addEventListener('mouseleave', Tooltip.hide);
     } else {
@@ -449,7 +441,7 @@ function createOptionsNode(isUnpin,position) {
             e.stopPropagation();
             activePin();
         });
-        pinBtn.tooltip = "Unpin";
+        pinBtn.tooltip = "Pin";
         pinBtn.addEventListener('mouseover', Tooltip.show);
         pinBtn.addEventListener('mouseleave', Tooltip.hide);
     }
