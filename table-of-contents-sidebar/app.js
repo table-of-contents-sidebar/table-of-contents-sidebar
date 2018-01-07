@@ -11,6 +11,9 @@ chrome.storage.sync.get({
     if (!toggle) return;
     if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
+    if (!nodes.nodes ||  nodes.nodes.length ==0) {
+        return;
+    }
     injectCss(theme);
     var fixedSidebarNode = createFixedSidebarNode();
     var fixedMenuNode = createFixedMenuNode();
