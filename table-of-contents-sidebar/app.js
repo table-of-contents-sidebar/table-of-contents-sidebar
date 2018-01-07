@@ -38,7 +38,8 @@ var Tooltip = {
             return false;
         }
         Tooltip.tooltip.innerHTML = tip ;
-        var pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 10;
+        var scrollTop = document.getElementById("table-of-contents-sidebar-list-container-id").scrollTop;
+        var pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 10 - scrollTop;
         var pos_left = 0;
         Tooltip.tooltip.className = '';
         if(Tooltip.tooltip.offsetWidth > 240) {
@@ -52,7 +53,7 @@ var Tooltip = {
         }
         
         if( pos_top < 0 ) {
-            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight - 5;
+            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight - 5 - scrollTop;
             Tooltip.tooltip.className += ' top';
         }
         
@@ -543,6 +544,7 @@ Node.prototype.appendChildren = function (root) {
     var that = this;
     if (!!root) {
         var ul = document.createElement("ul");
+        ul.id = "table-of-contents-sidebar-list-container-id";
         parseNodes(ul,root,0);
         that.appendChild(ul);
     }

@@ -118,7 +118,7 @@
 
 #table-of-contents-sidebar-fixed-sidebar-tooltip {
   opacity: 0;
-  margin-right: 8px;
+  margin: 0 8px 0 8px;
   text-align: center;
   color: #fff;
   background: #344150;
