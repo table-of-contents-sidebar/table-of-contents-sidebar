@@ -41,8 +41,11 @@ var Tooltip = {
             return false;
         }
         Tooltip.tooltip.innerHTML = tip ;
-        var scrollTop = document.getElementById("table-of-contents-sidebar-list-container-id").scrollTop;
-        var pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 10 - scrollTop;
+        var pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 10;
+        if (Tooltip.target['auto']) {
+            var scrollTop = document.getElementById("table-of-contents-sidebar-list-container-id").scrollTop;
+            pos_top  = pos_top - scrollTop;
+        }
         var pos_left = 0;
         Tooltip.tooltip.className = '';
         if(Tooltip.tooltip.offsetWidth > 240) {
@@ -56,7 +59,10 @@ var Tooltip = {
         }
         
         if( pos_top < 0 ) {
-            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight - 5 - scrollTop;
+            var pos_top  = Tooltip.target.offsetTop + Tooltip.target.offsetHeight - 5;
+            if (Tooltip.target['auto']) {
+                pos_top  = pos_top - scrollTop;
+            }
             Tooltip.tooltip.className += ' top';
         }
         
@@ -391,11 +397,17 @@ function createCopyrightNode() {
     yiting.title = "Yiting";
     yiting.href = "https://yiting.myportfolio.com?utm_source=toc";
     yiting.target = "_blank";
+    yiting.tooltip = "Yiting";
+    yiting.addEventListener('mouseover', Tooltip.show);
+    yiting.addEventListener('mouseleave', Tooltip.hide);
     var majiang = document.createElement('a');
     majiang.appendChild(document.createTextNode("Majiang"));
     majiang.title = "Majiang";
     majiang.href = "http://www.majiang.life?utm_source=toc";
     majiang.target = "_blank";
+    majiang.tooltip = "Majiang";
+    majiang.addEventListener('mouseover', Tooltip.show);
+    majiang.addEventListener('mouseleave', Tooltip.hide);
     var copyright = document.createTextNode("Powered by ");
     var and = document.createTextNode(" & ");
     span.appendChild(copyright);
@@ -514,6 +526,7 @@ function parseNodes(parent,node,index) {
             var text = document.createTextNode(node.text);
             refNode.appendChild(text);
             refNode.tooltip = node.text;
+            refNode.auto = true;
             refNode.href = "#" + node.id;
             refNode.addEventListener('mouseover', Tooltip.show);
             refNode.addEventListener('mouseleave', Tooltip.hide);
