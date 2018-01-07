@@ -34,7 +34,7 @@
     margin: 10px !important;
     color: #212121 !important;
     overflow-y: auto !important;
-    height: calc(100% - 100px) !important;
+    height: calc(100% - 110px) !important;
 }
 
 .table-of-contents-sidebar-fixed-sidebar ul li {    
@@ -80,8 +80,8 @@
 .table-of-contents-sidebar-fixed-sidebar .copyright {
     color: #7C8A9B !important;
     font-size: 11px !important;   
-    display: inline-block !important;
-    margin-left: 90px !important;
+    display: inline-block !important;    
+    margin-left: 20px !important;
     margin-bottom: 10px !important;
     line-height: normal !important;
 }

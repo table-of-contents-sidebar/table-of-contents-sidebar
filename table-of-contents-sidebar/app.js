@@ -397,7 +397,7 @@ function createCopyrightNode() {
     yiting.title = "Yiting";
     yiting.href = "https://yiting.myportfolio.com?utm_source=toc";
     yiting.target = "_blank";
-    yiting.tooltip = "Yiting";
+    yiting.tooltip = "Yiting's Blog";
     yiting.addEventListener('mouseover', Tooltip.show);
     yiting.addEventListener('mouseleave', Tooltip.hide);
     var majiang = document.createElement('a');
@@ -405,7 +405,7 @@ function createCopyrightNode() {
     majiang.title = "Majiang";
     majiang.href = "http://www.majiang.life?utm_source=toc";
     majiang.target = "_blank";
-    majiang.tooltip = "Majiang";
+    majiang.tooltip = "Majiang's Blog";
     majiang.addEventListener('mouseover', Tooltip.show);
     majiang.addEventListener('mouseleave', Tooltip.hide);
     var copyright = document.createTextNode("Powered by ");
