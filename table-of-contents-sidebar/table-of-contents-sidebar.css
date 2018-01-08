@@ -16,9 +16,9 @@
 
 .table-of-contents-sidebar-fixed-sidebar.show {
     width: 250px;
-    -webkit-box-shadow: 0px 0px 12px 12px rgba(216,216,216,0.5);
-    -moz-box-shadow: 0px 0px 12px 12px rgba(216,216,216,0.5);
-    box-shadow: 0px 0px 12px 12px rgba(216,216,216,0.5);
+    -webkit-box-shadow: 0px 0px 12px 12px rgba(216,216,216,0.3);
+    -moz-box-shadow: 0px 0px 12px 12px rgba(216,216,216,0.3);
+    box-shadow: 0px 0px 12px 12px rgba(216,216,216,0.3);
 }
 
 .table-of-contents-sidebar-fixed-sidebar span img {
