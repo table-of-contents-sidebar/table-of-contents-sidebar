@@ -485,11 +485,21 @@ function createOptionsNode(isUnpin,position) {
     githubBtn.addEventListener('mouseover', Tooltip.show);
     githubBtn.addEventListener('mouseleave', Tooltip.hide);
 
+    var starBtn = createImageNode("images/star.png", "Rate Us");
+    starBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        window.open('https://chrome.google.com/webstore/detail/table-of-contents-sidebar/ohohkfheangmbedkgechjkmbepeikkej/reviews', '_blank');
+    });
+    starBtn.tooltip = "Rate Us";
+    starBtn.addEventListener('mouseover', Tooltip.show);
+    starBtn.addEventListener('mouseleave', Tooltip.hide);
+
     optionsContainer.appendChild(leftBtn);
     optionsContainer.appendChild(pinBtn);
     // optionsContainer.appendChild(optionBtn);
     optionsContainer.appendChild(bugBtn);
     optionsContainer.appendChild(githubBtn);
+    optionsContainer.appendChild(starBtn);
     optionsContainer.appendChild(document.createElement('br'));
     return optionsContainer;
 }
