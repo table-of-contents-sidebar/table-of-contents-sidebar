@@ -11,7 +11,7 @@ chrome.storage.sync.get({
     if (!toggle) return;
     if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
-    if (!nodes.nodes ||  nodes.nodes.length ==0) {
+    if (!nodes.nodes ||  nodes.nodes.length ==0 || (nodes.nodes.length == 1 && !nodes.nodes.nodes)) {
         return;
     }
     injectCss(theme);
