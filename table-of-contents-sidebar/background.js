@@ -10,25 +10,11 @@ function displayEnable() {
             refresh();
         }
     });
-    chrome.contextMenus.create({
-        "title": "Disable on the current domain",
-        "contexts": ["page"],
-        "onclick": function (info) {
-            add2blocklist(info.pageUrl);
-        }
-    });
 }
 
 function displayDisable() {
     if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
-    chrome.contextMenus.create({
-        "title": "Disable on the current domain",
-        "contexts": ["page"],
-        "onclick": function (info) {
-            add2blocklist(info.pageUrl);
-        }
-    });
     chrome.contextMenus.create({
         title: "Disable",
         contexts: ["browser_action"],
@@ -83,17 +69,5 @@ function getHostname(href) {
     var l = document.createElement("a");
     l.href = href;
     return l.hostname;
-}
-
-function add2blocklist(url) {
-    var hostname = getHostname(url);
-    chrome.storage.sync.get({block_list: []}, function (result) {
-        var block_list = result.block_list;
-        if (block_list.indexOf(hostname) != -1) return;
-        block_list.push(hostname);
-        chrome.storage.sync.set({block_list: block_list}, function () {
-
-        });
-    });
 }
 checkToggle();

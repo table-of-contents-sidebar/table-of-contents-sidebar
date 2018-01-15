@@ -1,29 +1,21 @@
 chrome.storage.sync.get({
-    position: 'right',
-    tocs_toggle: true,
-    hover: true,
-    block_list: [],
-    theme: ""
+    tocs_toggle: true
 }, function (items) {
     var toggle = items.tocs_toggle;
-    var block_list = items.block_list;
-    var theme = items.theme;
     if (!toggle) return;
-    if (isBlocked(block_list)) return;
     var nodes = parseLinkableNodes();
     if (!nodes.nodes ||  nodes.nodes.length ==0 || (nodes.nodes.length == 1 && !nodes.nodes.nodes)) {
         return;
     }
-    injectCss(theme);
+    injectCss();
     var fixedSidebarNode = createFixedSidebarNode();
     var fixedMenuNode = createFixedMenuNode();
-    fixedSidebarNode.appendChild(createOptionsNode(items.hover, items.position));
+    fixedSidebarNode.appendChild(createOptionsNode());
     fixedSidebarNode.appendChildren(nodes);
     fixedSidebarNode.appendChild(createCopyrightNode());
     var doc = document.createElement("div");
     doc.id = "table-of-contents-sidebar-fixed-sidebar-tooltip";
     fixedSidebarNode.appendChild(doc);
-    restoreOptions(items, fixedSidebarNode, fixedMenuNode);
     document.body.appendChild(fixedSidebarNode);
     document.body.appendChild(fixedMenuNode);
     Tooltip.tooltip = document.getElementById('table-of-contents-sidebar-fixed-sidebar-tooltip');
@@ -91,38 +83,9 @@ window.onscroll = function() {
      fixedHeight = height;
 }
 
-function restoreOptions(optionsItems, sidebar, menu) {
-    if (optionsItems) {
-        var position = optionsItems.position;
-        var hover = optionsItems.hover;
-        if (position == "right") {
-            activeRight(sidebar, menu);
-        } else {
-            activeLeft(sidebar, menu);
-        }
-        if (hover) {
-            activeUnpin(sidebar, menu);
-        } else {
-            activePin(sidebar, menu);
-        }
-
-    } else {
-        chrome.storage.sync.get({
-            position: 'right',
-            tocs_toggle: false,
-            hover: false
-        }, function (items) {
-            if (items.tocs_toggle == false) {
-                return;
-            }
-            restoreOptions(items);
-        });
-    }
-}
-
-function injectCss(path) {
+function injectCss() {
     var link = document.createElement("link");
-    link.href = chrome.extension.getURL(!!path ? path : "table-of-contents-sidebar.css");
+    link.href = chrome.extension.getURL("table-of-contents-sidebar.css");
     link.type = "text/css";
     link.rel = "stylesheet";
     var headNode = document.getElementsByTagName("head");
@@ -417,50 +380,29 @@ function createCopyrightNode() {
     return span;
 }
 
-function createOptionsNode(isUnpin,position) {
+function createOptionsNode() {
     var optionsContainer = createSpanNode("");
 
     var leftBtn = createImageNode("images/right.png", "Right");
     leftBtn.id = "table-of-contents-sidebar-position-id";
-    if (!!position && position == "right") {
-        leftBtn.src = getImageUrl("images/left.png");
+    leftBtn.src = getImageUrl("images/left.png");
         leftBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             activeLeft();
         });
-        leftBtn.tooltip = "Left";
-        leftBtn.addEventListener('mouseover', Tooltip.show);
-        leftBtn.addEventListener('mouseleave', Tooltip.hide);
-    } else {
-        leftBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            activeRight();
-        });
-        leftBtn.tooltip = "Right";
-        leftBtn.addEventListener('mouseover', Tooltip.show);
-        leftBtn.addEventListener('mouseleave', Tooltip.hide);
-    }
+    leftBtn.tooltip = "Left";
+    leftBtn.addEventListener('mouseover', Tooltip.show);
+    leftBtn.addEventListener('mouseleave', Tooltip.hide);
 
     var pinBtn = createImageNode("images/unpin.png", "Pin");
     pinBtn.id = "table-of-contents-sidebar-pin-id";
-    if (!isUnpin) {
-        pinBtn.src = getImageUrl("images/pin.png");
-        pinBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            activeUnpin();
-        });
-        pinBtn.tooltip = "Unpin";
-        pinBtn.addEventListener('mouseover', Tooltip.show);
-        pinBtn.addEventListener('mouseleave', Tooltip.hide);
-    } else {
-        pinBtn.addEventListener('click', function (e) {
+    pinBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             activePin();
         });
-        pinBtn.tooltip = "Pin";
-        pinBtn.addEventListener('mouseover', Tooltip.show);
-        pinBtn.addEventListener('mouseleave', Tooltip.hide);
-    }
+    pinBtn.tooltip = "Pin";
+    pinBtn.addEventListener('mouseover', Tooltip.show);
+    pinBtn.addEventListener('mouseleave', Tooltip.hide);
 
     var optionBtn = createImageNode("images/settings.png", "Settings");
     optionBtn.addEventListener('click', function (e) {

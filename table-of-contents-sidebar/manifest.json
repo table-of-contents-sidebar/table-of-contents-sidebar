@@ -35,11 +35,8 @@
     "persistent": true
   },
   "web_accessible_resources": [
-    "images/icon/icon_blue_128x128.png",
     "images/*",
-    "table-of-contents-sidebar.css",
-    "options.html",
-    "themes/*"
+    "table-of-contents-sidebar.css"
   ],
   "icons": {
     "128": "images/icon/ic_enable.png"
