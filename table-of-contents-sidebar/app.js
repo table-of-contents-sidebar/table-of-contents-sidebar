@@ -67,20 +67,38 @@ var Tooltip = {
     }
 };
 
-window.onscroll = function() {
-    var height = 0;
-    var documents = document.getElementsByTagName('*');
-    for (var i = 0, l = documents.length; i < l; i++) {
-        var node = documents[i];
-        if(node.id == "table-of-contents-sidebar-id") continue;
-        var style = window.getComputedStyle(node,null);
-        var position = style.getPropertyValue("position");
-        var top =  style.getPropertyValue("top");
-        if(position == "fixed" && top == "0px" && node.offsetHeight < 200) {
-            height += node.offsetHeight;
-        }
-     }
-     fixedHeight = height;
+var isScrolling;
+window.addEventListener('scroll', function ( event ) {
+    window.clearTimeout( isScrolling );
+    isScrolling = setTimeout(function() {
+        var height = 0;
+        var documents = document.getElementsByTagName('*');
+        for (var i = 0, l = documents.length; i < l; i++) {
+            var node = documents[i];
+            if(node.id == "table-of-contents-sidebar-id") continue;
+            var style = window.getComputedStyle(node,null);
+            var position = style.getPropertyValue("position");
+            var top =  style.getPropertyValue("top");
+            if(position == "fixed" && top == "0px" && node.offsetHeight < 200) {
+                height += node.offsetHeight;
+            }
+         }
+         fixedHeight = height;
+         rebuildToc();
+    }, 500);
+}, false);
+
+function rebuildToc(){
+    var ul = document.getElementById("table-of-contents-sidebar-list-container-id");
+    if(!ul) return;
+    var nodes = parseLinkableNodes();
+    if (!nodes.nodes ||  nodes.nodes.length ==0 || (nodes.nodes.length == 1 && !nodes.nodes.nodes)) {
+        return;
+    }
+    while (ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+    }
+    parseNodes(ul,nodes,0);
 }
 
 function injectCss() {
