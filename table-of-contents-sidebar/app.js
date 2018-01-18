@@ -4,7 +4,7 @@ chrome.storage.sync.get({
     var toggle = items.tocs_toggle;
     if (!toggle) return;
     var nodes = parseLinkableNodes();
-    if (!nodes.nodes ||  nodes.nodes.length ==0 || (nodes.nodes.length == 1 && !nodes.nodes.nodes)) {
+    if (!nodes.nodes ||  nodes.nodes.length ==0 || (nodes.nodes.length == 1 && !nodes.nodes[0].nodes)) {
         return;
     }
     injectCss();
