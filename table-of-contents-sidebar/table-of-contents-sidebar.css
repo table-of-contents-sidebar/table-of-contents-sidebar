@@ -23,6 +23,7 @@
 
 .table-of-contents-sidebar-fixed-sidebar span img {
     display: inline-block;
+    border: none;
 }
 
 .table-of-contents-sidebar-fixed-sidebar span {
@@ -41,6 +42,7 @@
 .table-of-contents-sidebar-fixed-sidebar ul li {    
     list-style-type: none;
     line-height: 1.9 !important;
+    font-size: 14px !important;
     overflow-x: hidden;
 }
 
@@ -116,6 +118,7 @@
     width: 35px;
     z-index: 2147483645;
     cursor: pointer;
+    border: none;
 }
 
 #table-of-contents-sidebar-fixed-sidebar-tooltip {
