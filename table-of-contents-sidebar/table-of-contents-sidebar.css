@@ -39,11 +39,16 @@
     height: calc(100% - 110px) !important;
 }
 
-.table-of-contents-sidebar-fixed-sidebar ul li {    
+.table-of-contents-sidebar-fixed-sidebar ul li {   
+    padding-top: 0; 
     list-style-type: none;
     line-height: 1.9 !important;
     font-size: 14px !important;
     overflow-x: hidden;
+}
+
+.table-of-contents-sidebar-fixed-sidebar ul li::before {   
+    content:""; 
 }
 
 .table-of-contents-sidebar-fixed-sidebar ul li a:visited {    
@@ -137,6 +142,7 @@
   -o-border-radius: 5px;
   -ms-border-radius: 5px;    
   white-space: normal;
+  font-size: 14px;
 }
 #table-of-contents-sidebar-fixed-sidebar-tooltip.top {
   margin-top: 5px;
