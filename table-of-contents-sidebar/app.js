@@ -32,7 +32,7 @@ var Tooltip = {
         if( !tip || tip == '' ) {            
             return false;
         }
-        Tooltip.tooltip.innerHTML = tip ;
+        Tooltip.tooltip.innerText = tip ;
         var pos_top  = Tooltip.target.offsetTop - Tooltip.tooltip.offsetHeight - 10;
         if (Tooltip.target['auto']) {
             var scrollTop = document.getElementById("table-of-contents-sidebar-list-container-id").scrollTop;
