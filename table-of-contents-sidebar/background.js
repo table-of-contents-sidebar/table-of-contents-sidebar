@@ -2,7 +2,7 @@ function displayEnable() {
     if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
     chrome.contextMenus.create({
-        title: "Enable",
+        title: chrome.i18n.getMessage("enable"),
         contexts: ["browser_action"],
         onclick: function () {
             displayDisable();
@@ -16,7 +16,7 @@ function displayDisable() {
     if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
     chrome.contextMenus.create({
-        title: "Disable",
+        title: chrome.i18n.getMessage("disable"),
         contexts: ["browser_action"],
         onclick: function () {
             displayEnable();

@@ -1,0 +1,35 @@
+{
+  "enable": {
+  	"message":"Enable"
+  },
+  "disable": {
+  	"message":"Disable"
+  },
+  "yiting": {
+  	"message":"Yiting's Blog"
+  },
+  "majiang": {
+  	"message":"Majiang's Blog"
+  },
+  "rateus": {
+  	"message":"Rate Us"
+  },
+  "sourcecode": {
+  	"message":"Source Code"
+  },
+  "bug": {
+  	"message":"Report Bug"
+  },
+  "pin": {
+  	"message":"Pin"
+  },
+  "unpin": {
+  	"message":"Unpin"
+  },
+  "left": {
+  	"message":"Left"
+  },
+  "right": {
+  	"message":"Right"
+  }
+}

@@ -186,10 +186,6 @@ function parseLinkableNodes() {
                     continue;
                 }
             }
-            // comment tricky logic
-            // if (sidebarCount > 0 && absTop < iteratorAbsTop) {
-            //     break;
-            // }
             if (!node.id) {
                 node.id = uuid();
             }
@@ -281,7 +277,7 @@ function activeLeft(sidebar, menu) {
             e.stopPropagation();
             activeRight();
         });
-        positionNode.tooltip = "Right";
+        positionNode.tooltip = chrome.i18n.getMessage("right");
         positionNode.addEventListener('mouseover', Tooltip.show);
         positionNode.addEventListener('mouseleave', Tooltip.hide);
     }
@@ -304,7 +300,7 @@ function activeRight(sidebar, menu) {
             e.stopPropagation();
             activeLeft();
         });
-        positionNode.tooltip = "Left";
+        positionNode.tooltip = chrome.i18n.getMessage("left");
         positionNode.addEventListener('mouseover', Tooltip.show);
         positionNode.addEventListener('mouseleave', Tooltip.hide);
     }
@@ -327,7 +323,7 @@ function activePin(sidebar, menu) {
             e.stopPropagation();
             activeUnpin();
         });
-        pinNode.tooltip = "Unpin";
+        pinNode.tooltip = chrome.i18n.getMessage("unpin");
         pinNode.addEventListener('mouseover', Tooltip.show);
         pinNode.addEventListener('mouseleave', Tooltip.hide);
     }
@@ -352,7 +348,7 @@ function activeUnpin(sidebar, menu) {
             e.stopPropagation();
             activePin();
         });
-        pinNode.tooltip = "Pin";
+        pinNode.tooltip = chrome.i18n.getMessage("pin");
         pinNode.addEventListener('mouseover', Tooltip.show);
         pinNode.addEventListener('mouseleave', Tooltip.hide);
     }
@@ -375,18 +371,16 @@ function createCopyrightNode() {
     span.className = "copyright";
     var yiting = document.createElement('a');
     yiting.appendChild(document.createTextNode("Yiting"));
-    yiting.title = "Yiting";
     yiting.href = "https://yiting.myportfolio.com?utm_source=toc";
     yiting.target = "_blank";
-    yiting.tooltip = "Yiting's Blog";
+    yiting.tooltip = chrome.i18n.getMessage("yiting");
     yiting.addEventListener('mouseover', Tooltip.show);
     yiting.addEventListener('mouseleave', Tooltip.hide);
     var majiang = document.createElement('a');
     majiang.appendChild(document.createTextNode("Majiang"));
-    majiang.title = "Majiang";
     majiang.href = "http://www.majiang.life?utm_source=toc";
     majiang.target = "_blank";
-    majiang.tooltip = "Majiang's Blog";
+    majiang.tooltip = chrome.i18n.getMessage("majiang");
     majiang.addEventListener('mouseover', Tooltip.show);
     majiang.addEventListener('mouseleave', Tooltip.hide);
     var copyright = document.createTextNode("Powered by ");
@@ -408,7 +402,7 @@ function createOptionsNode() {
             e.stopPropagation();
             activeLeft();
         });
-    leftBtn.tooltip = "Left";
+    leftBtn.tooltip = chrome.i18n.getMessage("left");
     leftBtn.addEventListener('mouseover', Tooltip.show);
     leftBtn.addEventListener('mouseleave', Tooltip.hide);
 
@@ -418,7 +412,7 @@ function createOptionsNode() {
             e.stopPropagation();
             activePin();
         });
-    pinBtn.tooltip = "Pin";
+    pinBtn.tooltip = chrome.i18n.getMessage("pin");
     pinBtn.addEventListener('mouseover', Tooltip.show);
     pinBtn.addEventListener('mouseleave', Tooltip.hide);
 
@@ -432,7 +426,7 @@ function createOptionsNode() {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar/issues', '_blank');
     });
-    bugBtn.tooltip = "Report Bug";
+    bugBtn.tooltip = chrome.i18n.getMessage("bug");
     bugBtn.addEventListener('mouseover', Tooltip.show);
     bugBtn.addEventListener('mouseleave', Tooltip.hide);
 
@@ -441,7 +435,7 @@ function createOptionsNode() {
         e.stopPropagation();
         window.open('https://github.com/codedrinker/table-of-contents-sidebar', '_blank');
     });
-    githubBtn.tooltip = "Source Code";
+    githubBtn.tooltip = chrome.i18n.getMessage("sourcecode");
     githubBtn.addEventListener('mouseover', Tooltip.show);
     githubBtn.addEventListener('mouseleave', Tooltip.hide);
 
@@ -450,13 +444,12 @@ function createOptionsNode() {
         e.stopPropagation();
         window.open('https://chrome.google.com/webstore/detail/table-of-contents-sidebar/ohohkfheangmbedkgechjkmbepeikkej/reviews', '_blank');
     });
-    starBtn.tooltip = "Rate Us";
+    starBtn.tooltip = chrome.i18n.getMessage("rateus");
     starBtn.addEventListener('mouseover', Tooltip.show);
     starBtn.addEventListener('mouseleave', Tooltip.hide);
 
     optionsContainer.appendChild(leftBtn);
     optionsContainer.appendChild(pinBtn);
-    // optionsContainer.appendChild(optionBtn);
     optionsContainer.appendChild(bugBtn);
     optionsContainer.appendChild(githubBtn);
     optionsContainer.appendChild(starBtn);

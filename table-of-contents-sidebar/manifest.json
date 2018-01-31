@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Table of contents sidebar",
-  "version": "1.0.17",
+  "version": "1.0.18",
+  "default_locale": "en",
   "description": "An outline tool, Automatically creates table of contents in the sidebar that can be clicked through, for easy document navigation.",
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "content_scripts": [

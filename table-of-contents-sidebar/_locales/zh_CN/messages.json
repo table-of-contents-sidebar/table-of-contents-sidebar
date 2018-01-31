@@ -1,0 +1,35 @@
+{
+  "enable": {
+  	"message":"启用"
+  },
+  "disable": {
+  	"message":"禁用"
+  },
+  "yiting": {
+  	"message":"艺婷的博客"
+  },
+  "majiang": {
+  	"message":"麻酱的博客"
+  },
+  "rateus": {
+  	"message":"评价"
+  },
+  "sourcecode": {
+  	"message":"源码"
+  },
+  "bug": {
+  	"message":"反馈"
+  },
+  "pin": {
+  	"message":"固定"
+  },
+  "unpin": {
+  	"message":"取消固定"
+  },
+  "left": {
+  	"message":"居左"
+  },
+  "right": {
+  	"message":"居右"
+  }
+}
