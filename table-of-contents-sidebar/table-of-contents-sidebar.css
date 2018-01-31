@@ -1,4 +1,5 @@
 .table-of-contents-sidebar-fixed-sidebar {
+    font-weight: normal;
     font-family: roboto;
     transition: width 0.25s linear;
     position: fixed;
@@ -56,7 +57,8 @@
     color: #212121 !important;
 }
 
-.table-of-contents-sidebar-fixed-sidebar ul li a {    
+.table-of-contents-sidebar-fixed-sidebar ul li a {   
+    font-weight: normal; 
     text-decoration: none !important; 
     color: #212121 !important;
 }
