@@ -31,7 +31,7 @@ function enable() {
     });
     if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
-        path: "images/icon/ic_enable.png"
+        path: "images/ic_enable.png"
     });
 }
 function disable() {
@@ -39,7 +39,7 @@ function disable() {
     });
     if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
-        path: "images/icon/ic_disable.png"
+        path: "images/ic_disable.png"
     });
 }
 
