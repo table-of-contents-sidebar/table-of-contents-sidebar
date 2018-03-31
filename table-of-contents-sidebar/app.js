@@ -14,5 +14,6 @@ chrome.storage.sync.get({
         rateusTooltip: chrome.i18n.getMessage("rateus"),
         yitingTooltip: chrome.i18n.getMessage("yiting"),
         majiangTooltip: chrome.i18n.getMessage("majiang"),
+        integrateBtnTooltip: chrome.i18n.getMessage("integrate")
     });
 });

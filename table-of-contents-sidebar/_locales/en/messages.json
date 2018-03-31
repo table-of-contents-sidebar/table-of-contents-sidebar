@@ -31,5 +31,8 @@
   },
   "right": {
   	"message":"Right"
+  },
+  "integrate": {
+    "message":"Integrate to your website"
   }
 }

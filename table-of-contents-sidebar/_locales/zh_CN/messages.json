@@ -31,5 +31,8 @@
   },
   "right": {
   	"message":"居右"
+  },
+  "integrate": {
+    "message":"集成到博客"
   }
 }
