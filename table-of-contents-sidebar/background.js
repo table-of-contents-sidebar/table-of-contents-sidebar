@@ -1,3 +1,51 @@
+
+//isMenuCreated: true: have been created
+function addMenu(isMenuCreated) {
+    if (!chrome.contextMenus) return;
+    if (!isMenuCreated) {
+        chrome.contextMenus.create({
+            id: "menu1",
+            title: "menu",
+            contexts: ["browser_action"]
+        });
+        chrome.contextMenus.create({
+            id: "menu2",
+            title: "menu",
+            contexts: ["browser_action"]
+        });
+    }
+
+    chrome.storage.sync.get({
+        scroll_effect: false
+    }, function (items) {
+        var scrollMsg = items.scroll_effect ? chrome.i18n.getMessage("unscroll") : chrome.i18n.getMessage("scroll");
+        chrome.contextMenus.update("menu1", {
+            title: scrollMsg,
+            onclick: function () {
+                chrome.storage.sync.set({ 'scroll_effect': !items.scroll_effect }, function () {
+                    addMenu(true);
+                    refresh();
+                });
+            }
+        });
+    });
+
+    chrome.storage.sync.get({
+        show_tooltip: false
+    }, function (items) {
+        var tooltipMsg = items.show_tooltip ? chrome.i18n.getMessage("untooltip") : chrome.i18n.getMessage("tooltip");
+        chrome.contextMenus.update("menu2", {
+            title: tooltipMsg,
+            onclick: function () {
+                chrome.storage.sync.set({ 'show_tooltip': !items.show_tooltip }, function () {
+                    addMenu(true);
+                    refresh();
+                });
+            }
+        });
+    });
+}
+
 function displayEnable() {
     if (!chrome.contextMenus) return;
     chrome.contextMenus.removeAll();
@@ -10,6 +58,7 @@ function displayEnable() {
             refresh();
         }
     });
+    addMenu(false);
 }
 
 function displayDisable() {
@@ -24,10 +73,11 @@ function displayDisable() {
             refresh();
         }
     });
+    addMenu(false);
 }
 
 function enable() {
-    chrome.storage.sync.set({'tocs_toggle': true}, function () {
+    chrome.storage.sync.set({ 'tocs_toggle': true }, function () {
     });
     if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
@@ -35,7 +85,7 @@ function enable() {
     });
 }
 function disable() {
-    chrome.storage.sync.set({'tocs_toggle': false}, function () {
+    chrome.storage.sync.set({ 'tocs_toggle': false }, function () {
     });
     if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({

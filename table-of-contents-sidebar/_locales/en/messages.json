@@ -34,5 +34,17 @@
   },
   "integrate": {
     "message":"Integrate to your website"
+  },
+  "tooltip": {
+    "message": "show tooltip"
+  },
+  "untooltip": {
+    "message": "hide tooltip"
+  },
+  "scroll": {
+    "message": "scroll effect"
+  },
+  "unscroll": {
+    "message": "no scroll effect"
   }
 }

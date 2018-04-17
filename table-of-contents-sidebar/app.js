@@ -1,7 +1,11 @@
 chrome.storage.sync.get({
-    tocs_toggle: true
+    tocs_toggle: true,
+    scroll_effect:false,
+    show_tooltip:false
 }, function (items) {
     var toggle = items.tocs_toggle;
+    var effect = items.scroll_effect;
+    var tooltip = items.show_tooltip;
     if (!toggle) return;
     TableOfContents.init({
         basePath: chrome.extension.getURL("") + "table-of-contents-sidebar-lib/",
@@ -14,6 +18,8 @@ chrome.storage.sync.get({
         rateusTooltip: chrome.i18n.getMessage("rateus"),
         yitingTooltip: chrome.i18n.getMessage("yiting"),
         majiangTooltip: chrome.i18n.getMessage("majiang"),
-        integrateBtnTooltip: chrome.i18n.getMessage("integrate")
+        integrateBtnTooltip: chrome.i18n.getMessage("integrate"),
+        scrollEffect:effect,
+        showTooltip:tooltip
     });
 });
