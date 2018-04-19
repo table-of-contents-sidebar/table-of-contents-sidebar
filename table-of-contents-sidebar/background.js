@@ -1,4 +1,3 @@
-
 //isMenuCreated: true: have been created
 function addMenu(isMenuCreated) {
     if (!chrome.contextMenus) return;
@@ -22,7 +21,9 @@ function addMenu(isMenuCreated) {
         chrome.contextMenus.update("menu1", {
             title: scrollMsg,
             onclick: function () {
-                chrome.storage.sync.set({ 'scroll_effect': !items.scroll_effect }, function () {
+                chrome.storage.sync.set({
+                    'scroll_effect': !items.scroll_effect
+                }, function () {
                     addMenu(true);
                     refresh();
                 });
@@ -37,7 +38,9 @@ function addMenu(isMenuCreated) {
         chrome.contextMenus.update("menu2", {
             title: tooltipMsg,
             onclick: function () {
-                chrome.storage.sync.set({ 'show_tooltip': !items.show_tooltip }, function () {
+                chrome.storage.sync.set({
+                    'show_tooltip': !items.show_tooltip
+                }, function () {
                     addMenu(true);
                     refresh();
                 });
@@ -77,16 +80,19 @@ function displayDisable() {
 }
 
 function enable() {
-    chrome.storage.sync.set({ 'tocs_toggle': true }, function () {
-    });
+    chrome.storage.sync.set({
+        'tocs_toggle': true
+    }, function () {});
     if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
         path: "images/ic_enable.png"
     });
 }
+
 function disable() {
-    chrome.storage.sync.set({ 'tocs_toggle': false }, function () {
-    });
+    chrome.storage.sync.set({
+        'tocs_toggle': false
+    }, function () {});
     if (!chrome.browserAction) return;
     chrome.browserAction.setIcon({
         path: "images/ic_disable.png"
@@ -120,4 +126,20 @@ function getHostname(href) {
     l.href = href;
     return l.hostname;
 }
+//实际的作用是生成右键菜单
 checkToggle();
+
+function toggleToc() {
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+                type: "toggleToc"
+            },
+            function (response) {;
+            });
+    });
+}
+
+chrome.browserAction.onClicked.addListener(tab => toggleToc())
