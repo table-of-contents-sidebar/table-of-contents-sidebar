@@ -34,5 +34,17 @@
   },
   "integrate": {
     "message":"集成到博客"
+  },
+  "tooltip": {
+    "message": "显示提示信息"
+  },
+  "untooltip": {
+    "message": "隐藏提示信息"
+  },
+  "scroll": {
+    "message": "使用滚动效果"
+  },
+  "unscroll": {
+    "message": "取消滚动效果"
   }
 }
